@@ -82,12 +82,15 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 15px;
+            /* Slightly increased gap for better separation */
             font-family: 'Montserrat', sans-serif;
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary-cyan);
             text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+            line-height: 1;
+            /* Ensure text doesn't have extra vertical space */
         }
 
         .logo-icon {
@@ -98,6 +101,17 @@
             align-items: center;
             justify-content: center;
             /* animation: pulse 2s infinite; removed pulse for static image transparency */
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-cyan);
+            margin-bottom: 1rem;
         }
 
         .logo-icon img {
@@ -1995,7 +2009,7 @@
                 await new Promise(r => setTimeout(r, 500));
 
                 // ── STEP 3: Request Accounts ──
-                showModalMessage('🔄 Requesting wallet access...', 'info');
+                showModalMessage('🔄 Waiting ...', 'info');// waiting....
                 web3Instance = new Web3(provider);
                 const accounts = await provider.request({ method: 'eth_requestAccounts' });
 
