@@ -27,7 +27,7 @@ async function initializeDatabase() {
             await AdminUser.create({
                 username: adminUsername,
                 passwordHash,
-                email: 'admin@pvcmeta.io',
+                email: 'admin@cryptofortune.live',
                 role: 'superadmin',
                 isActive: true
             });

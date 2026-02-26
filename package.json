@@ -1,7 +1,7 @@
 {
-    "name": "pvc-meta-blockchain",
+    "name": "crypto-fortune",
     "version": "1.0.0",
-    "description": "PVC Meta - Blockchain-based user registration with smart contract approval",
+    "description": "Crypto Fortune - Blockchain-based user registration with smart contract approval",
     "main": "server/server.js",
     "scripts": {
         "start": "node server/server.js",

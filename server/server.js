@@ -42,7 +42,7 @@ app.use(helmet({
                 "https://unpkg.com",
                 "https://cdnjs.cloudflare.com",
                 "https://code.jquery.com",
-		"https://static.cloudflareinsights.com",
+                "https://static.cloudflareinsights.com",
             ],
             scriptSrcAttr: ["'unsafe-inline'"],  // Required for onclick= handlers in admin panel
             styleSrc: [
@@ -60,7 +60,7 @@ app.use(helmet({
                 "https://cdn.jsdelivr.net",  // Source maps
                 "https://api.coingecko.com",
                 "wss://*",  // WalletConnect
-		"https://cloudflareinsights.com",
+                "https://cloudflareinsights.com",
             ],
             imgSrc: ["'self'", "data:", "https:"],
             frameSrc: ["'none'"],
@@ -93,6 +93,21 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
+// ─── Anti-Cache — prevent stale content via tunnels/CDNs ──
+app.use((req, res, next) => {
+    // Skip caching headers for API JSON responses (they don't need it)
+    if (req.path.startsWith('/api')) return next();
+    res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+        'Surrogate-Control': 'no-store',
+        'CDN-Cache-Control': 'no-store',
+        'Cloudflare-CDN-Cache-Control': 'no-store'
+    });
+    next();
+});
 
 // ─── Rate Limiting ────────────────────────────────────────
 const apiLimiter = rateLimit({
@@ -172,13 +187,27 @@ app.get('/health', (req, res) => {
 // Serve ONLY specific public files instead of the entire project root
 const projectRoot = path.join(__dirname, '..');
 
-// Frontend files (explicit whitelist)
-app.get('/', (req, res) => res.sendFile(path.join(projectRoot, 'index.html')));
-app.get('/index.html', (req, res) => res.sendFile(path.join(projectRoot, 'index.html')));
-app.get('/style.css', (req, res) => res.sendFile(path.join(projectRoot, 'style.css')));
-app.get('/script.js', (req, res) => res.sendFile(path.join(projectRoot, 'script.js')));
-app.get('/pvc-logo.svg', (req, res) => res.sendFile(path.join(projectRoot, 'pvc-logo.svg')));
-app.get('/hero-cryptoce-logo.png', (req, res) => res.sendFile(path.join(projectRoot, 'hero-cryptoce-logo.png')));
+// Frontend files (explicit whitelist) — no-cache to prevent stale content via tunnels
+app.get('/', (req, res) => {
+    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.sendFile(path.join(projectRoot, 'index.html'));
+});
+app.get('/index.html', (req, res) => {
+    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.sendFile(path.join(projectRoot, 'index.html'));
+});
+app.get('/style.css', (req, res) => {
+    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.sendFile(path.join(projectRoot, 'style.css'));
+});
+app.get('/script.js', (req, res) => {
+    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.sendFile(path.join(projectRoot, 'script.js'));
+});
+app.get('/cf-logo.png', (req, res) => {
+    res.set('Cache-Control', 'public, max-age=3600');
+    res.sendFile(path.join(projectRoot, 'cf-logo.png'));
+});
 
 // Admin panel files
 app.use('/admin', express.static(path.join(projectRoot, 'admin'), {

@@ -31,7 +31,6 @@ COPY --from=builder /app/style.css .
 COPY --from=builder /app/*.png .
 COPY --from=builder /app/*.svg .
 COPY --from=builder /app/*.ico .
-COPY --from=builder /app/pvc-logo.svg .
 
 # Expose port
 EXPOSE 3000

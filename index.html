@@ -4,71 +4,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PVC Meta | Empowering the Future of Crypto Together</title>
-    <link rel="icon" type="image/png" href="/hero-cryptoce-logo.png">
-    <link rel="apple-touch-icon" href="/hero-cryptoce-logo.png">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Crypto Fortune | Cyber-Native On-Chain Earning Protocol</title>
+    <meta name="description"
+        content="Crypto Fortune — Immutable, automated, non-custodial on-chain earning protocol on BNB Smart Chain.">
+    <link rel="icon" type="image/png" href="/cf-logo.png">
+    <link rel="apple-touch-icon" href="/cf-logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <!-- Web3.js Library -->
     <script src="https://cdn.jsdelivr.net/npm/web3@4.2.0/dist/web3.min.js"></script>
-    <!-- WalletConnect v1 removed: bridge servers are shut down -->
-
-    <!-- jQuery Library (Required for AJAX) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- SweetAlert2 Library (Required for Alert Dialogs) -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            box-sizing: border-box
         }
 
         :root {
+            --bg-primary: #050510;
+            --bg-secondary: #0a0a1a;
+            --bg-card: rgba(15, 15, 35, .7);
+            --purple: #7c3aed;
+            --blue: #3b82f6;
+            --cyan: #06b6d4;
+            --green: #10b981;
+            --neon-purple: #a855f7;
+            --neon-blue: #60a5fa;
+            --neon-cyan: #22d3ee;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-glow: rgba(124, 58, 237, .3);
+            --card-border: rgba(124, 58, 237, .15);
             --primary-cyan: #00d4ff;
             --primary-teal: #006b7d;
             --deep-teal: #003d4d;
             --dark-bg: #001a24;
             --light-cyan: #6ff5ff;
             --accent-green: #00ffaa;
-            --network-color: rgba(0, 212, 255, 0.3);
+            --network-color: rgba(0, 212, 255, .3);
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--dark-bg);
-            color: white;
+            font-family: 'Inter', 'Poppins', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             overflow-x: hidden;
-            line-height: 1.6;
+            line-height: 1.6
         }
 
-        /* Navigation */
         nav {
-            background: linear-gradient(135deg, rgba(0, 106, 125, 0.95), rgba(0, 61, 77, 0.98));
-            backdrop-filter: blur(10px);
+            background: rgba(5, 5, 16, .85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--card-border);
             padding: 1rem 2rem;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 30px rgba(0, 212, 255, 0.2);
-            animation: slideDown 0.6s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            transition: background .3s
         }
 
         .nav-container {
@@ -76,64 +78,73 @@
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: center
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
-            /* Slightly increased gap for better separation */
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
+            gap: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.4rem;
             font-weight: 700;
-            color: var(--primary-cyan);
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-            line-height: 1;
-            /* Ensure text doesn't have extra vertical space */
+            color: #fff;
+            text-decoration: none
         }
 
         .logo-icon {
             width: auto;
-            height: 50px;
-            min-width: 50px;
+            height: 44px;
+            min-width: 44px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            /* animation: pulse 2s infinite; removed pulse for static image transparency */
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-cyan);
-            margin-bottom: 1rem;
+            justify-content: center
         }
 
         .logo-icon img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.5));
+            filter: drop-shadow(0 0 8px rgba(124, 58, 237, .6))
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem
         }
 
         .nav-links {
             display: flex;
+            align-items: center;
             gap: 2rem;
             list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li {
+            display: flex;
+            align-items: center;
         }
 
         .nav-links a {
-            color: white;
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
+            font-size: .9rem;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            transition: color .3s;
             position: relative;
-            padding: 0.5rem 0;
+            padding: .5rem 0;
+            display: flex;
+            align-items: center;
         }
 
         .nav-links a::after {
@@ -143,77 +154,203 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--primary-cyan);
-            transition: width 0.3s ease;
+            background: linear-gradient(90deg, var(--purple), var(--cyan));
+            transition: width .3s
         }
 
         .nav-links a:hover {
-            color: var(--primary-cyan);
+            color: #fff
         }
 
         .nav-links a:hover::after {
-            width: 100%;
+            width: 100%
+        }
+
+        /* Dropdown CSS */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            cursor: pointer;
+        }
+
+        .dropdown-toggle svg {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-dropdown:hover .dropdown-toggle svg {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: rgba(10, 10, 30, 0.95);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 12px;
+            padding: 0.5rem;
+            min-width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .nav-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1rem;
+            color: var(--text-primary) !important;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .dropdown-item::after {
+            display: none;
+            /* remove original underline effect */
+        }
+
+        .dropdown-item svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(124, 58, 237, 0.15);
+            color: var(--neon-purple) !important;
+        }
+
+        .dropdown-item.telegram:hover {
+            color: #0088cc !important;
+            background: rgba(0, 136, 204, 0.15);
+        }
+
+        .dropdown-item.youtube:hover {
+            color: #ff0000 !important;
+            background: rgba(255, 0, 0, 0.15);
         }
 
         .wallet-buttons {
             display: flex;
             gap: 1rem;
-            align-items: center;
+            align-items: center
         }
 
         .wallet-btn {
-            padding: 0.7rem 1.5rem;
-            background: linear-gradient(135deg, var(--primary-cyan), var(--light-cyan));
+            padding: .65rem 1.6rem;
+            background: linear-gradient(135deg, var(--purple), var(--blue));
             border: none;
             border-radius: 10px;
-            color: var(--deep-teal);
+            color: #fff;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: .9rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Montserrat', sans-serif;
+            transition: all .3s;
+            font-family: 'Inter', sans-serif;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+            gap: .5rem;
+            box-shadow: 0 0 20px rgba(124, 58, 237, .3)
         }
 
         .wallet-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(0, 212, 255, 0.5);
+            box-shadow: 0 0 30px rgba(124, 58, 237, .5)
+        }
+
+        .nav-socials {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-right: 1rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding-right: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            transition: all 0.3s ease;
+        }
+
+        .social-link.telegram:hover {
+            background: #0088cc;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 136, 204, 0.4);
+        }
+
+        .social-link.youtube:hover {
+            background: #ff0000;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
         }
 
         .wallet-btn.connected {
-            background: linear-gradient(135deg, var(--accent-green), #00cc88);
+            background: linear-gradient(135deg, var(--green), #059669)
         }
 
         .wallet-btn.register {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 212, 255, 0.3));
-            border: 2px solid var(--primary-cyan);
-            color: white;
+            background: transparent;
+            border: 1px solid var(--purple);
+            color: var(--neon-purple)
         }
 
         .wallet-address {
-            font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
+            font-family: 'Rajdhani', monospace;
+            font-size: .82rem
         }
 
         .mobile-menu {
             display: none;
             flex-direction: column;
             gap: 5px;
-            cursor: pointer;
+            cursor: pointer
         }
 
         .mobile-menu span {
-            width: 25px;
-            height: 3px;
-            background: var(--primary-cyan);
-            transition: all 0.3s ease;
-            border-radius: 2px;
+            width: 24px;
+            height: 2px;
+            background: var(--neon-purple);
+            transition: all .3s;
+            border-radius: 2px
         }
 
-        /* Web3 Modal */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -221,38 +358,257 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, .85);
             z-index: 2000;
-            backdrop-filter: blur(5px);
-            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(8px);
+            animation: fadeIn .3s
         }
 
         .modal-overlay.active {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: center
         }
 
         .modal-content {
-            background: linear-gradient(135deg, var(--deep-teal), var(--primary-teal));
-            border: 2px solid var(--primary-cyan);
+            background: linear-gradient(145deg, #0f0f2a, #1a1a3e);
+            border: 1px solid rgba(124, 58, 237, .3);
             border-radius: 20px;
             padding: 2.5rem;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.4);
-            animation: slideUp 0.3s ease;
+            width: 460px;
+            max-width: 90vw;
+            box-shadow: 0 0 60px rgba(124, 58, 237, .2);
+            animation: slideUp .3s;
+            /* Fixed size — prevent layout shift during registration steps */
+            box-sizing: border-box;
+            flex-shrink: 0;
         }
 
-        @keyframes slideUp {
+        /* ── Success Popup Overlay ── */
+        .success-popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .85);
+            z-index: 3000;
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-popup-overlay.active {
+            display: flex;
+        }
+
+        .success-popup {
+            background: linear-gradient(145deg, #0f1f2a, #0a2a20);
+            border: 1px solid rgba(16, 185, 129, .4);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            width: 420px;
+            max-width: 90vw;
+            text-align: center;
+            box-shadow: 0 0 80px rgba(16, 185, 129, .25);
+            animation: popIn .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
             from {
-                transform: translateY(50px);
+                transform: scale(0.6);
                 opacity: 0;
             }
 
             to {
-                transform: translateY(0);
+                transform: scale(1);
                 opacity: 1;
+            }
+        }
+
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--green), #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 0 40px rgba(16, 185, 129, .4);
+            animation: checkPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes checkPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 40px rgba(16, 185, 129, .4);
+            }
+
+            50% {
+                box-shadow: 0 0 60px rgba(16, 185, 129, .7);
+            }
+        }
+
+        .success-popup h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-popup .success-subtitle {
+            color: var(--green);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-popup .success-address {
+            font-family: 'Rajdhani', monospace;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            background: rgba(16, 185, 129, .1);
+            border: 1px solid rgba(16, 185, 129, .2);
+            border-radius: 10px;
+            padding: 0.8rem;
+            margin-bottom: 1.5rem;
+            word-break: break-all;
+        }
+
+        .success-popup .success-dismiss-btn {
+            padding: 0.85rem 2.5rem;
+            background: linear-gradient(135deg, var(--green), #059669);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all .3s;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 0 25px rgba(16, 185, 129, .3);
+        }
+
+        .success-popup .success-dismiss-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, .4);
+        }
+
+        /* ── Fail Popup Overlay ── */
+        .fail-popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .85);
+            z-index: 3000;
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fail-popup-overlay.active {
+            display: flex;
+        }
+
+        .fail-popup {
+            background: linear-gradient(145deg, #2a0f0f, #2a0a0a);
+            border: 1px solid rgba(239, 68, 68, .4);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            width: 420px;
+            max-width: 90vw;
+            text-align: center;
+            box-shadow: 0 0 80px rgba(239, 68, 68, .25);
+            animation: popIn .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .fail-cross {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 0 40px rgba(239, 68, 68, .4);
+            animation: failPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes failPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 40px rgba(239, 68, 68, .4);
+            }
+
+            50% {
+                box-shadow: 0 0 60px rgba(239, 68, 68, .7);
+            }
+        }
+
+        .fail-popup h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .fail-popup .fail-subtitle {
+            color: #ef4444;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .fail-popup .fail-message {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            background: rgba(239, 68, 68, .1);
+            border: 1px solid rgba(239, 68, 68, .2);
+            border-radius: 10px;
+            padding: 0.8rem;
+            margin-bottom: 1.5rem;
+            word-break: break-word;
+        }
+
+        .fail-popup .fail-dismiss-btn {
+            padding: 0.85rem 2.5rem;
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all .3s;
+        }
+
+        .fail-popup .fail-dismiss-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(239, 68, 68, .4);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(40px);
+                opacity: 0
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1
             }
         }
 
@@ -260,103 +616,105 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2rem
         }
 
         .modal-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-cyan);
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
         }
 
         .close-modal {
             background: none;
             border: none;
             font-size: 2rem;
-            color: white;
+            color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all .3s
         }
 
         .close-modal:hover {
-            color: var(--primary-cyan);
-            transform: rotate(90deg);
+            color: var(--neon-purple);
+            transform: rotate(90deg)
         }
 
         .modal-body {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.5rem
         }
 
         .modal-info {
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid var(--primary-cyan);
+            background: rgba(124, 58, 237, .1);
+            border: 1px solid rgba(124, 58, 237, .25);
             border-radius: 10px;
             padding: 1rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-size: .95rem
         }
 
         .network-info {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-            color: var(--accent-green);
-            font-weight: 600;
+            gap: .5rem;
+            margin-top: .5rem;
+            color: var(--green);
+            font-weight: 600
         }
 
         .connect-wallet-btn {
-            padding: 1.2rem;
-            background: linear-gradient(135deg, var(--primary-cyan), var(--light-cyan));
+            padding: 1.1rem;
+            background: linear-gradient(135deg, var(--purple), var(--blue));
             border: none;
             border-radius: 12px;
-            color: var(--deep-teal);
+            color: #fff;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Montserrat', sans-serif;
-            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+            transition: all .3s;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 0 25px rgba(124, 58, 237, .3)
         }
 
         .connect-wallet-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 30px rgba(0, 212, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 0 35px rgba(124, 58, 237, .5)
         }
 
         .connect-wallet-btn:disabled {
-            opacity: 0.5;
+            opacity: .5;
             cursor: not-allowed;
-            transform: none;
+            transform: none
         }
 
         .error-message {
-            background: rgba(255, 59, 48, 0.2);
-            border: 1px solid rgba(255, 59, 48, 0.5);
+            background: rgba(239, 68, 68, .15);
+            border: 1px solid rgba(239, 68, 68, .3);
             border-radius: 10px;
             padding: 1rem;
-            color: #ff9999;
-            font-size: 0.9rem;
+            color: #fca5a5;
+            font-size: .9rem
         }
 
         .success-message {
-            background: linear-gradient(135deg, var(--accent-green), #00cc88);
+            background: linear-gradient(135deg, var(--green), #059669);
             border: none;
             border-radius: 12px;
-            padding: 1.5rem;
-            color: var(--deep-teal);
+            padding: 1.3rem;
+            color: #fff;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 255, 170, 0.4);
-            animation: fadeIn 0.3s ease;
-            margin-top: 1rem;
+            box-shadow: 0 0 25px rgba(16, 185, 129, .3);
+            animation: fadeIn .3s;
+            margin-top: 1rem
         }
 
-        /* Animated Network Background */
         .network-bg {
             position: fixed;
             top: 0;
@@ -364,16 +722,52 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.3;
-            will-change: transform;
+            opacity: .2
         }
 
         .network-bg canvas {
             width: 100%;
-            height: 100%;
+            height: 100%
         }
 
-        /* Hero Section */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--neon-purple);
+            border-radius: 50%;
+            opacity: .15;
+            animation: float linear infinite
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0
+            }
+
+            10% {
+                opacity: .15
+            }
+
+            90% {
+                opacity: .15
+            }
+
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0
+            }
+        }
+
         .hero {
             min-height: 100vh;
             display: flex;
@@ -384,178 +778,96 @@
             padding: 8rem 2rem 4rem;
             position: relative;
             z-index: 1;
-            will-change: opacity;
+            background: radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, .15) 0%, transparent 60%)
         }
 
         .subtitle {
-            font-size: 1.2rem;
-            color: white;
-            margin-bottom: 2rem;
-            letter-spacing: 2px;
+            font-family: 'Rajdhani', monospace;
+            font-size: .85rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            animation: fadeIn 0.8s ease-out 0.3s backwards;
-            font-weight: 600;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            animation: fadeIn .8s ease-out .3s backwards
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(20px)
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-12px);
             }
         }
 
         .hero h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2.8rem, 8vw, 5.5rem);
             font-weight: 900;
-            background: linear-gradient(135deg, white, var(--primary-cyan), var(--light-cyan), var(--accent-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 2rem;
-            line-height: 1.2;
-            animation: fadeIn 0.8s ease-out 0.5s backwards;
-            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            animation: fadeIn .8s ease-out .5s backwards;
+            letter-spacing: 4px;
+        }
+
+        .hero h1 .cyan {
+            color: #00e5ff;
+            text-shadow:
+                0 0 10px rgba(0, 229, 255, 0.8),
+                0 0 20px rgba(0, 229, 255, 0.6),
+                0 0 40px rgba(0, 229, 255, 0.4),
+                0 0 80px rgba(0, 229, 255, 0.2);
+        }
+
+        .hero h1 .purple {
+            color: #c84dfa;
+            text-shadow:
+                0 0 10px rgba(200, 77, 250, 0.8),
+                0 0 20px rgba(200, 77, 250, 0.6),
+                0 0 40px rgba(200, 77, 250, 0.4),
+                0 0 80px rgba(200, 77, 250, 0.2);
         }
 
         .hero-description {
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 700px;
-            margin: 0 auto 3rem;
-            animation: fadeIn 0.8s ease-out 0.7s backwards;
+            font-size: clamp(.95rem, 1.8vw, 1.15rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            animation: fadeIn .8s ease-out .7s backwards;
+            line-height: 1.7
         }
 
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            animation: fadeIn 0.8s ease-out 0.9s backwards;
-        }
-
-        .cta-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            padding: 2rem 2.5rem;
-            background: linear-gradient(135deg, rgba(0, 106, 125, 0.3), rgba(0, 61, 77, 0.5));
-            border: 2px solid var(--primary-cyan);
-            border-radius: 15px;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            min-width: 200px;
-        }
-
-        .cta-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .cta-btn:hover::before {
-            left: 100%;
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.4);
-            background: linear-gradient(135deg, rgba(0, 106, 125, 0.5), rgba(0, 61, 77, 0.7));
-        }
-
-        .btn-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary-cyan), var(--light-cyan));
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
-        }
-
-        /* Hero Register Button */
-        .hero-register-btn {
-            padding: 1.5rem 3rem;
-            background: linear-gradient(135deg, var(--primary-cyan), var(--light-cyan));
+        .heading-register-btn {
+            padding: 1.1rem 3rem;
+            background: linear-gradient(135deg, var(--purple), var(--blue));
             border: none;
             border-radius: 50px;
-            color: var(--deep-teal);
+            color: #fff;
             font-weight: 700;
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             cursor: pointer;
-            transition: all 0.4s ease;
-            font-family: 'Montserrat', sans-serif;
-            box-shadow: 0 8px 30px rgba(0, 212, 255, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-register-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .hero-register-btn:hover::before {
-            left: 100%;
-        }
-
-        .hero-register-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 12px 40px rgba(0, 212, 255, 0.6);
-        }
-
-        .hero-register-btn.connected {
-            background: linear-gradient(135deg, var(--accent-green), #00cc88);
-            box-shadow: 0 8px 30px rgba(0, 255, 170, 0.4);
-        }
-
-        .hero-register-btn.connected:hover {
-            box-shadow: 0 12px 40px rgba(0, 255, 170, 0.6);
-        }
-
-        /* Heading Register Button */
-        .heading-register-btn {
-            padding: 1.5rem 3.5rem;
-            background: linear-gradient(135deg, #ffffff, var(--primary-cyan));
-            border: 3px solid white;
-            border-radius: 50px;
-            color: var(--deep-teal);
-            font-weight: 800;
-            font-size: 1.4rem;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            font-family: 'Montserrat', sans-serif;
-            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.3), 0 0 60px rgba(0, 212, 255, 0.4);
+            transition: all .4s;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 0 40px rgba(124, 58, 237, .4);
             position: relative;
             overflow: hidden;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px
         }
 
         .heading-register-btn::before {
@@ -565,55 +877,157 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-            transition: left 0.6s ease;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .15), transparent);
+            transition: left .6s
         }
 
         .heading-register-btn:hover::before {
-            left: 100%;
+            left: 100%
         }
 
         .heading-register-btn:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 15px 50px rgba(255, 255, 255, 0.5), 0 0 80px rgba(0, 212, 255, 0.6);
-            border-color: var(--light-cyan);
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 0 60px rgba(124, 58, 237, .6)
         }
 
         .heading-register-btn.connected {
-            background: linear-gradient(135deg, #ffffff, var(--accent-green));
-            border-color: var(--accent-green);
-            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.3), 0 0 60px rgba(0, 255, 170, 0.4);
+            background: linear-gradient(135deg, var(--green), #059669);
+            box-shadow: 0 0 40px rgba(16, 185, 129, .4)
         }
 
         .heading-register-btn.connected:hover {
-            box-shadow: 0 15px 50px rgba(255, 255, 255, 0.5), 0 0 80px rgba(0, 255, 170, 0.6);
+            box-shadow: 0 0 60px rgba(16, 185, 129, .6)
         }
 
-        /* Animated Logo Circle */
-        .logo-circle {
-            width: 400px;
-            height: 400px;
-            margin: 4rem auto;
+        .hero-register-btn {
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+            border: none;
+            border-radius: 50px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all .4s;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 0 30px rgba(124, 58, 237, .3);
             position: relative;
-            animation: fadeIn 0.8s ease-out 1.1s backwards;
+            overflow: hidden
+        }
+
+        .hero-register-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .15), transparent);
+            transition: left .5s
+        }
+
+        .hero-register-btn:hover::before {
+            left: 100%
+        }
+
+        .hero-register-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 50px rgba(124, 58, 237, .5)
+        }
+
+        .hero-register-btn.connected {
+            background: linear-gradient(135deg, var(--green), #059669)
+        }
+
+        .hero-register-btn.connected:hover {
+            box-shadow: 0 0 50px rgba(16, 185, 129, .5)
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeIn .8s ease-out .9s backwards;
+            margin-top: 1rem
+        }
+
+        .cta-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .8rem;
+            padding: 1.8rem 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all .4s;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            min-width: 180px
+        }
+
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(124, 58, 237, .15), transparent);
+            transition: left .5s
+        }
+
+        .cta-btn:hover::before {
+            left: 100%
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 40px rgba(124, 58, 237, .25);
+            border-color: var(--purple)
+        }
+
+        .btn-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, .2), rgba(59, 130, 246, .2));
+            border: 1px solid rgba(124, 58, 237, .3);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem
+        }
+
+        .logo-circle {
+            width: 350px;
+            height: 350px;
+            margin: 3rem auto;
+            position: relative;
+            animation: fadeIn .8s ease-out 1.1s backwards
         }
 
         .circle-container {
             width: 100%;
             height: 100%;
             position: relative;
-            animation: rotate 20s linear infinite;
-            will-change: transform;
-            transform: translateZ(0);
+            animation: rotate 25s linear infinite;
+            transform: translateZ(0)
         }
 
         @keyframes rotate {
             from {
-                transform: rotate(0deg);
+                transform: rotate(0deg)
             }
 
             to {
-                transform: rotate(360deg);
+                transform: rotate(360deg)
             }
         }
 
@@ -622,16 +1036,15 @@
         .inner-ring {
             position: absolute;
             border-radius: 50%;
-            border: 2px solid;
+            border: 1px solid
         }
 
         .outer-ring {
             width: 100%;
             height: 100%;
-            border-color: var(--primary-cyan);
-            border-width: 1px;
-            opacity: 0.15;
-            animation: pulse-ring 4s ease-in-out infinite, flicker 5s infinite;
+            border-color: var(--purple);
+            opacity: .12;
+            animation: pulse-ring 4s ease-in-out infinite, flicker 5s infinite
         }
 
         .middle-ring {
@@ -639,10 +1052,9 @@
             height: 85%;
             top: 7.5%;
             left: 7.5%;
-            border-color: var(--light-cyan);
-            border-width: 1px;
-            opacity: 0.25;
-            animation: pulse-ring 4s ease-in-out infinite 0.5s;
+            border-color: var(--neon-blue);
+            opacity: .2;
+            animation: pulse-ring 4s ease-in-out infinite .5s
         }
 
         .inner-ring {
@@ -650,19 +1062,17 @@
             height: 70%;
             top: 15%;
             left: 15%;
-            border-color: var(--accent-green);
-            border-width: 1px;
-            opacity: 0.35;
-            animation: pulse-ring 4s ease-in-out infinite 1s;
+            border-color: var(--cyan);
+            opacity: .3;
+            animation: pulse-ring 4s ease-in-out infinite 1s
         }
 
-        /* Tech HUD Elements */
         .tech-ring {
             position: absolute;
             border-radius: 50%;
-            border: 2px dashed var(--primary-cyan);
-            opacity: 0.6;
-            filter: drop-shadow(0 0 10px var(--primary-cyan));
+            border: 2px dashed var(--purple);
+            opacity: .5;
+            filter: drop-shadow(0 0 8px var(--purple))
         }
 
         .tech-ring-1 {
@@ -670,9 +1080,7 @@
             height: 92%;
             top: 4%;
             left: 4%;
-            border-style: dashed;
-            border-width: 3px;
-            animation: rotate-cw 15s linear infinite, flicker 3s infinite 1s;
+            animation: rotate-cw 15s linear infinite, flicker 3s infinite 1s
         }
 
         .tech-ring-2 {
@@ -681,9 +1089,9 @@
             top: 11%;
             left: 11%;
             border-style: dotted;
-            border-width: 4px;
+            border-width: 3px;
             animation: rotate-ccw 10s linear infinite, flicker 4s infinite 2s;
-            opacity: 0.4;
+            opacity: .35
         }
 
         .tech-ring-3 {
@@ -691,72 +1099,68 @@
             height: 60%;
             top: 20%;
             left: 20%;
-            border-style: dashed;
-            border-width: 2px;
-            border-spacing: 12px;
+            border-width: 1px;
             animation: rotate-cw 25s linear infinite;
-            opacity: 0.8;
+            opacity: .6
         }
 
-        /* Scanner Sweep Effect */
         .scanner-beam {
             position: absolute;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
-            background: conic-gradient(from 0deg, transparent 0%, rgba(0, 212, 255, 0.4) 10%, transparent 20%);
+            background: conic-gradient(from 0deg, transparent 0%, rgba(124, 58, 237, .35) 10%, transparent 20%);
             border-radius: 50%;
             animation: rotate-cw 4s linear infinite;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.6;
+            opacity: .5
         }
 
-        /* Corner Brackets */
         .tech-bracket {
             position: absolute;
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--primary-cyan);
-            opacity: 0.8;
-            filter: drop-shadow(0 0 8px var(--primary-cyan));
+            width: 36px;
+            height: 36px;
+            border: 2px solid var(--neon-purple);
+            opacity: .7;
+            filter: drop-shadow(0 0 6px var(--purple));
             z-index: 3;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 8px;
-            font-family: monospace;
-            color: var(--primary-cyan);
-            white-space: nowrap;
+            font-size: 7px;
+            font-family: 'Rajdhani', monospace;
+            color: var(--neon-purple);
+            white-space: nowrap
         }
 
         .bracket-tl {
             top: 15%;
             left: 15%;
             border-right: none;
-            border-bottom: none;
+            border-bottom: none
         }
 
         .bracket-tr {
             top: 15%;
             right: 15%;
             border-left: none;
-            border-bottom: none;
+            border-bottom: none
         }
 
         .bracket-bl {
             bottom: 15%;
             left: 15%;
             border-right: none;
-            border-top: none;
+            border-top: none
         }
 
         .bracket-br {
             bottom: 15%;
             right: 15%;
             border-left: none;
-            border-top: none;
+            border-top: none
         }
 
         @keyframes flicker {
@@ -774,7 +1178,7 @@
             90%,
             94%,
             100% {
-                opacity: 1;
+                opacity: 1
             }
 
             2%,
@@ -784,27 +1188,27 @@
             52%,
             72%,
             92% {
-                opacity: 0.7;
+                opacity: .6
             }
         }
 
         @keyframes rotate-cw {
             from {
-                transform: rotate(0deg);
+                transform: rotate(0deg)
             }
 
             to {
-                transform: rotate(360deg);
+                transform: rotate(360deg)
             }
         }
 
         @keyframes rotate-ccw {
             from {
-                transform: rotate(360deg);
+                transform: rotate(360deg)
             }
 
             to {
-                transform: rotate(0deg);
+                transform: rotate(0deg)
             }
         }
 
@@ -812,11 +1216,11 @@
 
             0%,
             100% {
-                transform: scale(1);
+                transform: scale(1)
             }
 
             50% {
-                transform: scale(1.02);
+                transform: scale(1.02)
             }
         }
 
@@ -825,75 +1229,75 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 180px;
-            height: 180px;
-            background: radial-gradient(circle, rgba(0, 26, 36, 0.9) 0%, rgba(0, 61, 77, 0.2) 100%);
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(5, 5, 16, .95) 0%, rgba(15, 15, 35, .3) 100%);
             border-radius: 50%;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            box-shadow: 0 0 40px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(124, 58, 237, .25);
+            box-shadow: 0 0 50px rgba(124, 58, 237, .25), inset 0 0 25px rgba(124, 58, 237, .15);
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 2;
+            z-index: 2
         }
 
         .center-logo img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            animation: glow 2s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
+            animation: glow 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(124, 58, 237, .5))
         }
 
         @keyframes glow {
 
             0%,
             100% {
-                filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
+                filter: drop-shadow(0 0 20px rgba(124, 58, 237, .4))
             }
 
             50% {
-                filter: drop-shadow(0 0 40px rgba(0, 212, 255, 1));
+                filter: drop-shadow(0 0 40px rgba(124, 58, 237, .8))
             }
         }
 
         .orbit-dots {
             position: absolute;
             width: 100%;
-            height: 100%;
+            height: 100%
         }
 
         .dot {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background: var(--accent-green);
+            width: 8px;
+            height: 8px;
+            background: var(--neon-cyan);
             border-radius: 50%;
-            box-shadow: 0 0 15px var(--accent-green);
+            box-shadow: 0 0 12px var(--cyan)
         }
 
         .dot:nth-child(1) {
             top: 0;
             left: 50%;
-            animation: orbit-dot 4s linear infinite;
+            animation: orbit-dot 4s linear infinite
         }
 
         .dot:nth-child(2) {
             top: 50%;
             right: 0;
-            animation: orbit-dot 4s linear infinite 1s;
+            animation: orbit-dot 4s linear infinite 1s
         }
 
         .dot:nth-child(3) {
             bottom: 0;
             left: 50%;
-            animation: orbit-dot 4s linear infinite 2s;
+            animation: orbit-dot 4s linear infinite 2s
         }
 
         .dot:nth-child(4) {
             top: 50%;
             left: 0;
-            animation: orbit-dot 4s linear infinite 3s;
+            animation: orbit-dot 4s linear infinite 3s
         }
 
         @keyframes orbit-dot {
@@ -901,73 +1305,127 @@
             0%,
             100% {
                 opacity: 1;
-                transform: scale(1);
+                transform: scale(1)
             }
 
             50% {
-                opacity: 0.5;
-                transform: scale(1.5);
+                opacity: .4;
+                transform: scale(1.4)
             }
         }
 
-        /* Error Message */
-        .error-section {
-            background: rgba(255, 59, 48, 0.1);
-            border: 1px solid rgba(255, 59, 48, 0.3);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin: 3rem auto;
-            max-width: 600px;
-            text-align: center;
-            color: #ff9999;
+        .protocol-cards {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+            position: relative;
+            z-index: 1
         }
 
-        /* Live Crypto Data Section */
+        .protocol-card {
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 1.8rem 1.2rem;
+            text-align: center;
+            backdrop-filter: blur(12px);
+            transition: all .4s
+        }
+
+        .protocol-card:hover {
+            border-color: var(--purple);
+            box-shadow: 0 0 30px rgba(124, 58, 237, .15);
+            transform: translateY(-4px)
+        }
+
+        .protocol-card-icon {
+            font-size: 1.8rem;
+            margin-bottom: .8rem;
+            filter: drop-shadow(0 0 6px rgba(0, 212, 255, .4));
+        }
+
+        .protocol-card-label {
+            font-family: 'Rajdhani', monospace;
+            font-size: .7rem;
+            color: var(--neon-cyan);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: .6rem
+        }
+
+        .protocol-card-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff
+        }
+
+        .section-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--card-border), transparent);
+            margin: 3rem 0
+        }
+
+        .error-section {
+            background: rgba(239, 68, 68, .1);
+            border: 1px solid rgba(239, 68, 68, .25);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            text-align: center;
+            color: #fca5a5
+        }
+
         .crypto-data-section {
             max-width: 1400px;
-            margin: 4rem auto;
+            margin: 2rem auto;
             padding: 2rem;
             position: relative;
-            z-index: 1;
+            z-index: 1
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 3rem
         }
 
         .section-header h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, white, var(--primary-cyan), var(--accent-green));
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, var(--neon-purple), var(--neon-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 1rem;
+            margin-bottom: .8rem
         }
 
         .section-subtitle {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-size: 1rem
         }
 
         .crypto-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem
         }
 
         .crypto-card {
-            background: linear-gradient(135deg, rgba(0, 106, 125, 0.2), rgba(0, 61, 77, 0.3));
-            border: 2px solid var(--primary-cyan);
-            border-radius: 20px;
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.4s ease;
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.8rem;
+            backdrop-filter: blur(12px);
+            transition: all .4s;
             position: relative;
-            overflow: hidden;
+            overflow: hidden
         }
 
         .crypto-card::before {
@@ -977,432 +1435,571 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
-            transition: left 0.5s ease;
+            background: linear-gradient(90deg, transparent, rgba(124, 58, 237, .08), transparent);
+            transition: left .5s
         }
 
         .crypto-card:hover::before {
-            left: 100%;
+            left: 100%
         }
 
         .crypto-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 50px rgba(0, 212, 255, 0.4);
-            border-color: var(--accent-green);
+            transform: translateY(-6px);
+            box-shadow: 0 8px 40px rgba(124, 58, 237, .2);
+            border-color: var(--purple)
         }
 
         .crypto-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.3rem
         }
 
         .crypto-name {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: .8rem
         }
 
         .crypto-icon {
-            font-size: 2.5rem;
-            filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+            font-size: 2.2rem;
+            filter: drop-shadow(0 0 8px rgba(124, 58, 237, .4))
         }
 
         .crypto-symbol {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: var(--primary-cyan);
+            color: #fff
         }
 
         .crypto-fullname {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
+            font-size: .82rem;
+            color: var(--text-muted)
         }
 
         .crypto-price {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.8rem;
             font-weight: 700;
-            color: white;
-            margin-bottom: 1rem;
+            color: #fff;
+            margin-bottom: .8rem
         }
 
         .crypto-change {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
+            gap: .4rem;
+            padding: .4rem .8rem;
+            border-radius: 8px;
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: .95rem
         }
 
         .crypto-change.positive {
-            background: rgba(0, 255, 170, 0.2);
-            color: var(--accent-green);
+            background: rgba(16, 185, 129, .15);
+            color: var(--green)
         }
 
         .crypto-change.negative {
-            background: rgba(255, 59, 48, 0.2);
-            color: #ff6b6b;
+            background: rgba(239, 68, 68, .15);
+            color: #f87171
         }
 
         .crypto-stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            gap: .8rem;
+            margin-top: 1.3rem;
+            padding-top: 1.3rem;
+            border-top: 1px solid var(--card-border)
         }
 
         .stat-item {
             display: flex;
             flex-direction: column;
-            gap: 0.3rem;
+            gap: .2rem
         }
 
         .stat-label {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.5);
-            font-weight: 500;
+            font-size: .8rem;
+            color: var(--text-muted);
+            font-weight: 500
         }
 
         .stat-value {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
             font-weight: 600;
-            color: white;
+            color: #fff
         }
 
         .loading {
             text-align: center;
             padding: 3rem;
-            color: var(--primary-cyan);
-            font-size: 1.2rem;
+            color: var(--neon-purple);
+            font-size: 1.1rem
         }
 
         .loading::after {
             content: '...';
-            animation: dots 1.5s steps(4, end) infinite;
+            animation: dots 1.5s steps(4, end) infinite
         }
 
         @keyframes dots {
 
             0%,
             20% {
-                content: '.';
+                content: '.'
             }
 
             40% {
-                content: '..';
+                content: '..'
             }
 
             60%,
             100% {
-                content: '...';
+                content: '...'
             }
         }
 
-        /* Market Stats Banner */
         .market-banner {
-            background: linear-gradient(135deg, rgba(0, 106, 125, 0.3), rgba(0, 61, 77, 0.4));
-            border: 1px solid var(--primary-cyan);
-            border-radius: 15px;
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
             padding: 2rem;
             margin-bottom: 3rem;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px)
         }
 
         .banner-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            text-align: center
         }
 
         .banner-stat {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: .4rem
         }
 
         .banner-stat-label {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
+            font-size: .82rem;
+            color: var(--text-muted);
             font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px
         }
 
         .banner-stat-value {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.6rem;
             font-weight: 700;
-            color: var(--primary-cyan);
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
         }
 
         .banner-stat-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            margin-bottom: .3rem
         }
 
-        /* Footer Section */
-        .footer {
-            background: linear-gradient(135deg, var(--deep-teal), var(--primary-teal));
-            padding: 4rem 2rem 2rem;
-            margin-top: 6rem;
+        /* ── Protocol Showcase Section ── */
+        .protocol-showcase {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
             position: relative;
             z-index: 1;
         }
 
+        .protocol-subsection {
+            margin-bottom: 1.5rem;
+        }
+
+        .protocol-subsection-title {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #a78bfa;
+            text-shadow: 0 0 15px rgba(124, 58, 237, .35);
+        }
+
+        .protocol-icon-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .protocol-icon-card {
+            background: rgba(15, 15, 40, .7);
+            border: 1px solid rgba(124, 58, 237, .2);
+            border-radius: 14px;
+            padding: 1.5rem 1.2rem;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            transition: all .4s;
+        }
+
+        .protocol-icon-card:hover {
+            border-color: rgba(124, 58, 237, .5);
+            box-shadow: 0 0 25px rgba(124, 58, 237, .15);
+            transform: translateY(-4px);
+        }
+
+        .protocol-icon-card .card-icon {
+            font-size: 2rem;
+            margin-bottom: .8rem;
+            display: block;
+            filter: drop-shadow(0 0 8px rgba(124, 58, 237, .4));
+        }
+
+        .protocol-icon-card p {
+            color: #c4b5fd;
+            font-size: .88rem;
+            line-height: 1.6;
+        }
+
+        .protocol-flow-items {
+            display: flex;
+            flex-direction: column;
+            gap: .8rem;
+        }
+
+        .protocol-flow-item {
+            background: rgba(15, 15, 40, .6);
+            border: 1px solid rgba(124, 58, 237, .25);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            color: #c4b5fd;
+            font-size: .92rem;
+            line-height: 1.6;
+            transition: all .4s;
+            box-shadow: 0 0 12px rgba(124, 58, 237, .08);
+        }
+
+        .protocol-flow-item:hover {
+            border-color: rgba(124, 58, 237, .5);
+            box-shadow: 0 0 20px rgba(124, 58, 237, .2);
+            transform: translateX(6px);
+        }
+
+        @media(max-width:768px) {
+            .protocol-icon-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .bottom-cta {
+            text-align: center;
+            padding: 5rem 2rem;
+            position: relative;
+            z-index: 1;
+            background: radial-gradient(ellipse at 50% 100%, rgba(124, 58, 237, .1) 0%, transparent 60%)
+        }
+
+        .bottom-cta h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1.6rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem
+        }
+
+        .bottom-cta p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: .95rem
+        }
+
+        .footer {
+            background: rgba(5, 5, 16, .95);
+            border-top: 1px solid var(--card-border);
+            padding: 4rem 2rem 2rem;
+            margin-top: 0;
+            position: relative;
+            z-index: 1
+        }
+
         .footer-container {
             max-width: 1400px;
-            margin: 0 auto;
+            margin: 0 auto
         }
 
         .footer-content {
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-cyan);
+            margin-bottom: 3rem
         }
 
         .footer-description {
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-secondary);
             line-height: 1.8;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: .9rem
         }
 
         .language-selector {
             display: flex;
-            gap: 1rem;
+            gap: .8rem
         }
 
         .lang-btn {
-            padding: 0.5rem 1rem;
-            background: rgba(0, 212, 255, 0.2);
-            border: 1px solid var(--primary-cyan);
-            border-radius: 8px;
-            color: white;
+            padding: .4rem .8rem;
+            background: rgba(124, 58, 237, .1);
+            border: 1px solid rgba(124, 58, 237, .25);
+            border-radius: 6px;
+            color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all .3s;
             font-weight: 600;
+            font-size: .8rem
         }
 
         .lang-btn:hover,
         .lang-btn.active {
-            background: var(--primary-cyan);
-            color: var(--deep-teal);
-            transform: translateY(-2px);
+            background: var(--purple);
+            color: #fff;
+            border-color: var(--purple);
+            transform: translateY(-1px)
         }
 
         .quick-links h3 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--primary-cyan);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--neon-purple);
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase
         }
 
         .quick-links ul {
-            list-style: none;
+            list-style: none
         }
 
         .quick-links a {
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-secondary);
             text-decoration: none;
             display: block;
-            padding: 0.5rem 0;
-            transition: all 0.3s ease;
+            padding: .4rem 0;
+            transition: all .3s;
+            font-size: .9rem
         }
 
         .quick-links a:hover {
-            color: var(--primary-cyan);
-            padding-left: 10px;
+            color: var(--neon-purple);
+            padding-left: 8px
         }
 
         .footer-bottom {
             text-align: center;
             padding-top: 2rem;
-            border-top: 1px solid rgba(0, 212, 255, 0.3);
-            color: rgba(255, 255, 255, 0.6);
+            border-top: 1px solid var(--card-border);
+            color: var(--text-muted);
+            font-size: .85rem
         }
 
-        /* Responsive Design */
-        @media (max-width: 968px) {
-            .wallet-buttons {
-                display: none;
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            justify-content: center
+        }
+
+        .footer-social a {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: rgba(124, 58, 237, .1);
+            border: 1px solid rgba(124, 58, 237, .2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all .3s
+        }
+
+        .footer-social a:hover {
+            background: var(--purple);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(124, 58, 237, .3)
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all .6s ease-out
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        @media(max-width:1024px) {
+            .protocol-cards {
+                grid-template-columns: repeat(2, 1fr)
             }
         }
 
-        @media (max-width: 768px) {
+        @media(max-width:968px) {
+            .wallet-buttons {
+                display: none
+            }
+        }
+
+        @media(max-width:768px) {
             .nav-links {
                 display: none;
                 position: absolute;
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: linear-gradient(135deg, rgba(0, 106, 125, 0.98), rgba(0, 61, 77, 0.98));
+                background: rgba(5, 5, 16, .98);
                 flex-direction: column;
-                padding: 2rem;
-                gap: 1rem;
+                padding: 1.5rem;
+                gap: .8rem;
+                border-bottom: 1px solid var(--card-border)
             }
 
             .nav-links.active {
-                display: flex;
+                display: flex
             }
 
             .mobile-menu {
-                display: flex;
-            }
-
-            .mobile-menu.active span:nth-child(1) {
-                transform: rotate(45deg) translate(8px, 8px);
-            }
-
-            .mobile-menu.active span:nth-child(2) {
-                opacity: 0;
-            }
-
-            .mobile-menu.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(6px, -6px);
+                display: flex
             }
 
             .hero {
-                padding: 6rem 1.5rem 3rem;
+                padding: 6rem 1.5rem 3rem
             }
 
             .cta-buttons {
-                flex-direction: column;
+                flex-direction: column
             }
 
             .cta-btn {
-                width: 100%;
+                width: 100%
             }
 
+            .heading-register-btn,
             .hero-register-btn {
-                width: 100%;
-                padding: 1.3rem 2rem;
-                font-size: 1.1rem;
-            }
-
-            .heading-register-btn {
                 width: 90%;
-                padding: 1.2rem 2rem;
-                font-size: 1.1rem;
-                letter-spacing: 0.5px;
+                padding: 1rem 1.5rem;
+                font-size: 1rem
             }
 
             .logo-circle {
-                width: 300px;
-                height: 300px;
+                width: 280px;
+                height: 280px
             }
 
             .center-logo {
-                width: 140px;
-                height: 140px;
-            }
-
-            .center-logo::before {
-                font-size: 60px;
+                width: 130px;
+                height: 130px
             }
 
             .footer-content {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr
+            }
+
+            .protocol-cards {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .origin-cards {
+                grid-template-columns: 1fr
             }
         }
 
-        @media (max-width: 480px) {
-            nav {
-                padding: 1rem;
+        @media(max-width:768px) {
+            .nav-dropdown:hover .dropdown-menu {
+                position: static;
+                transform: none;
+                opacity: 1;
+                visibility: visible;
+                box-shadow: none;
+                background: rgba(255, 255, 255, 0.03);
+                border: none;
+                margin-top: 0.5rem;
+                border-radius: 8px;
             }
 
-            .logo {
-                font-size: 1.2rem;
+            .nav-socials {
+                display: none;
+                /* Hide standalone socials on mobile */
+            }
+
+            .wallet-btn.connected {
+                height: 36px;
+                min-width: 36px
             }
 
             .logo-icon {
-                width: auto;
-                height: 40px;
-                min-width: 40px;
+                height: 36px;
+                min-width: 36px
             }
 
             .subtitle {
-                font-size: 0.9rem;
+                font-size: .75rem
             }
 
             .logo-circle {
-                width: 250px;
-                height: 250px;
+                width: 230px;
+                height: 230px
             }
 
             .center-logo {
-                width: 110px;
-                height: 110px;
+                width: 100px;
+                height: 100px
+            }
+
+            .protocol-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: .5rem
+            }
+
+            .protocol-card {
+                padding: 1rem .6rem
+            }
+
+            .protocol-card-icon {
+                font-size: 1.4rem;
+                margin-bottom: .4rem
+            }
+
+            .protocol-card-label {
+                font-size: .6rem;
+                margin-bottom: .3rem
+            }
+
+            .protocol-card-value {
+                font-size: .82rem
             }
         }
 
-        /* Scroll Animations */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
-        }
-
-        .fade-in-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Floating particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            background: var(--primary-cyan);
-            border-radius: 50%;
-            opacity: 0.2;
-            animation: float linear infinite;
-            will-change: transform, opacity;
-            transform: translateZ(0);
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0
             }
 
-            10% {
-                opacity: 0.2;
-            }
-
-            90% {
-                opacity: 0.2;
-            }
-
-            100% {
-                transform: translateY(-100px) scale(1);
-                opacity: 0;
+            to {
+                transform: translateY(0);
+                opacity: 1
             }
         }
     </style>
@@ -1422,157 +2019,201 @@
         <div class="nav-container">
             <div class="logo">
                 <div class="logo-icon">
-                    <img src="/hero-cryptoce-logo.png" alt="PVC Meta Logo">
+                    <img src="/cf-logo.png" alt="Crypto Fortune Logo">
                 </div>
-                <span>PVC Meta</span>
+                <span>CRYPTO FORTUNE</span>
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-                <li><a href="#blog">Blog</a></li>
+                <li><a href="#about">Protocol</a></li>
+                <li><a href="#contract">Contract</a></li>
+                <li class="nav-dropdown">
+                    <a class="dropdown-toggle">Links
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 10l5 5 5-5z" />
+                        </svg>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="https://t.me/cryptofortunelive" target="_blank" class="dropdown-item telegram">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.211-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.023c.24-.213-.054-.334-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.653-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.941z" />
+                            </svg>
+                            Official Telegram
+                        </a>
+                    </div>
+                </li>
             </ul>
             <div class="wallet-buttons">
-                <!-- Register button merged into Connect -->
                 <button class="wallet-btn" id="connectWalletBtn">Register</button>
             </div>
-            <!-- Mobile menu removed -->
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <div class="hero-logo" style="animation: float 3s ease-in-out infinite;">
+            <img src="/cf-logo.png" alt="Crypto Fortune"
+                style="width:120px;height:auto;filter:drop-shadow(0 0 20px rgba(124,58,237,.5)) drop-shadow(0 0 40px rgba(0,212,255,.3));">
+        </div>
+        <p class="subtitle">CYBER-NATIVE ON-CHAIN EARNING PROTOCOL</p>
+        <h1><span class="cyan">CRYPTO</span> <span class="purple">FORTUNE</span></h1>
+        <p class="hero-description">
+            Immutable &#8226; Automated &#8226; Non-Custodial &#8212; Explore real-time crypto data, DeFi insights, and
+            the latest Crypto Fortune updates powered by the community.
+        </p>
 
-        <h1>Empowering the<br>Future of Crypto<br>Together</h1>
-
-        <!-- Register Button after Main Heading -->
-        <div style="margin: 2.5rem 0 2rem; animation: fadeIn 0.8s ease-out 0.6s backwards;">
+        <div style="margin: 2rem 0; animation: fadeIn 0.8s ease-out 0.6s backwards;">
             <button class="heading-register-btn" id="headingRegisterBtn">
-                Register Now
+                ENROLL NOW
             </button>
         </div>
 
-        <p class="hero-description">
-            Explore real-time crypto data, DeFi insights, trending tokens, and the latest PVC Meta updates — all powered
-            by the community.
-        </p>
+        <!-- Protocol Info Cards -->
+        <div class="protocol-cards fade-in-up" style="margin-top:2rem;">
+            <div class="protocol-card">
+                <div class="protocol-card-icon">&#x1F512;</div>
+                <div class="protocol-card-label">INTEGRITY</div>
+                <div class="protocol-card-value">IMMUTABLE</div>
+            </div>
+            <div class="protocol-card">
+                <div class="protocol-card-icon">&#x1F6E1;&#xFE0F;</div>
+                <div class="protocol-card-label">CUSTODY</div>
+                <div class="protocol-card-value">NONE</div>
+            </div>
+            <div class="protocol-card">
+                <div class="protocol-card-icon">&#x26A1;</div>
+                <div class="protocol-card-label">EXECUTION</div>
+                <div class="protocol-card-value">AUTOMATED</div>
+            </div>
+            <div class="protocol-card">
+                <div class="protocol-card-icon">&#x1F517;</div>
+                <div class="protocol-card-label">CHAIN</div>
+                <div class="protocol-card-value">BNB SMART CHAIN</div>
+            </div>
+        </div>
 
-        <!-- Animated Logo Circle -->
-        <div class="logo-circle">
-            <div class="circle-container">
-                <div class="outer-ring"></div>
-                <div class="middle-ring"></div>
-                <div class="inner-ring"></div>
-                <div class="tech-ring tech-ring-1"></div>
-                <div class="tech-ring tech-ring-2"></div>
-                <div class="tech-ring tech-ring-3"></div>
-                <div class="scanner-beam"></div>
-                <div class="tech-bracket bracket-tl"></div>
-                <div class="tech-bracket bracket-tr"></div>
-                <div class="tech-bracket bracket-bl"></div>
-                <div class="tech-bracket bracket-br"></div>
-                <div class="orbit-dots">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
+        <!-- BNB Smart Chain Origin Log -->
+        <div class="origin-log fade-in-up"
+            style="margin-top:3rem; max-width:800px; margin-left:auto; margin-right:auto;">
+            <h2
+                style="font-family:'Inter',sans-serif; font-size:clamp(1.1rem,2.5vw,1.4rem); font-weight:700; text-align:center; margin-bottom:1.5rem; letter-spacing:2px; text-transform:uppercase; color:#a78bfa; text-shadow:0 0 15px rgba(124,58,237,.35);">
+                BNB SMART CHAIN &#8212; ORIGIN LOG
+            </h2>
+            <div style="display:flex; flex-direction:column; gap:.8rem;">
+                <div
+                    style="background:rgba(15,15,40,.7); border:1px solid rgba(124,58,237,.25); border-radius:12px; padding:1rem 1.5rem; color:#c4b5fd; font-size:.92rem; line-height:1.6;">
+                    BNB Smart Chain was engineered to overcome scalability and cost limitations of early blockchain
+                    networks.
+                </div>
+                <div
+                    style="background:rgba(15,15,40,.7); border:1px solid rgba(124,58,237,.25); border-radius:12px; padding:1rem 1.5rem; color:#c4b5fd; font-size:.92rem; line-height:1.6;">
+                    By combining EVM compatibility with high-performance consensus, BSC enables fast, low-cost
+                    transactions.
+                </div>
+                <div
+                    style="background:rgba(15,15,40,.7); border:1px solid rgba(124,58,237,.25); border-radius:12px; padding:1rem 1.5rem; color:#c4b5fd; font-size:.92rem; line-height:1.6;">
+                    Today, BNB Smart Chain powers DeFi, GameFi, NFTs, and large-scale on-chain ecosystems used by
+                    millions.
                 </div>
             </div>
-            <div class="center-logo">
-                <img src="/hero-cryptoce-logo.png" alt="PVC Meta Logo">
-            </div>
         </div>
 
-        <div class="cta-buttons">
-            <a href="#data" class="cta-btn">
-                <div class="btn-icon">📈</div>
-                <span>VIEW LIVE DATA</span>
-            </a>
-            <a href="#news" class="cta-btn">
-                <div class="btn-icon">📰</div>
-                <span>READ NEWS</span>
-            </a>
-            <a href="#earn" class="cta-btn">
-                <div class="btn-icon">💎</div>
-                <span>START EARNING</span>
-            </a>
-        </div>
-
-        <!-- Register Button for Web3 Connection -->
-        <!-- Redundant Button Removed -->
-
-        <!-- Error Message -->
         <div class="error-section" id="error-message" style="display: none;">
-            <p>⚠️ Error fetching crypto data.</p>
+            <p>&#x26A0;&#xFE0F; Error fetching crypto data.</p>
         </div>
     </section>
 
-    <!-- Live Crypto Data Section -->
-    <section class="crypto-data-section" id="data">
-        <div class="section-header">
-            <h2>🌐 Live Crypto Market Data</h2>
-            <p class="section-subtitle">Real-time cryptocurrency prices and market statistics powered by CoinGecko API
-            </p>
-        </div>
+    <!-- Protocol Showcase Section -->
+    <section class="protocol-showcase fade-in-up" id="about">
 
-        <!-- Market Stats Banner -->
-        <div class="market-banner">
-            <div class="banner-stats">
-                <div class="banner-stat">
-                    <div class="banner-stat-icon">🏦</div>
-                    <div class="banner-stat-label">Total Market Cap</div>
-                    <div class="banner-stat-value" id="totalMarketCap">Loading...</div>
+        <!-- BNB Economic Layer -->
+        <div class="protocol-subsection">
+            <h2 class="protocol-subsection-title">BNB ECONOMIC LAYER</h2>
+            <div class="protocol-icon-cards">
+                <div class="protocol-icon-card fade-in-up">
+                    <span class="card-icon">&#x1FA99;</span>
+                    <p>BNB is used to pay transaction fees, enabling frequent and affordable protocol interaction.</p>
                 </div>
-                <div class="banner-stat">
-                    <div class="banner-stat-icon">📊</div>
-                    <div class="banner-stat-label">24h Trading Volume</div>
-                    <div class="banner-stat-value" id="totalVolume">Loading...</div>
-                </div>
-                <div class="banner-stat">
-                    <div class="banner-stat-icon">₿</div>
-                    <div class="banner-stat-label">BTC Dominance</div>
-                    <div class="banner-stat-value" id="btcDominance">Loading...</div>
-                </div>
-                <div class="banner-stat">
-                    <div class="banner-stat-icon">🪙</div>
-                    <div class="banner-stat-label">Active Cryptocurrencies</div>
-                    <div class="banner-stat-value" id="activeCryptos">Loading...</div>
+                <div class="protocol-icon-card fade-in-up">
+                    <span class="card-icon">&#x1F4C8;</span>
+                    <p>BNB secures network execution and aligns incentives across validators.</p>
                 </div>
             </div>
         </div>
 
-        <div class="crypto-grid" id="cryptoGrid">
-            <div class="loading">Loading live crypto data</div>
+        <!-- Smart Contract Core -->
+        <div class="protocol-subsection">
+            <h2 class="protocol-subsection-title">SMART CONTRACT CORE</h2>
+            <div class="protocol-icon-cards">
+                <div class="protocol-icon-card fade-in-up">
+                    <span class="card-icon">&#x1F512;</span>
+                    <p>Immutable logic once deployed</p>
+                </div>
+                <div class="protocol-icon-card fade-in-up">
+                    <span class="card-icon">&#x1F6E1;&#xFE0F;</span>
+                    <p>Trustless execution without admin control</p>
+                </div>
+                <div class="protocol-icon-card fade-in-up">
+                    <span class="card-icon">&#x2728;</span>
+                    <p>Automated rewards and rules enforcement</p>
+                </div>
+            </div>
         </div>
+
+        <!-- Protocol Flow -->
+        <div class="protocol-subsection">
+            <h2 class="protocol-subsection-title">PROTOCOL FLOW</h2>
+            <div class="protocol-flow-items">
+                <div class="protocol-flow-item fade-in-up">
+                    Users enter on-chain participation cycles governed by smart contracts.
+                </div>
+                <div class="protocol-flow-item fade-in-up">
+                    All accounting, rewards, and history exist permanently on-chain.
+                </div>
+                <div class="protocol-flow-item fade-in-up">
+                    The protocol is permissionless and globally accessible.
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Bottom CTA -->
+    <section class="bottom-cta fade-in-up">
+        <h2>ENTER THE DECENTRALIZED ECONOMY</h2>
+        <p>Code governs everything. No intermediaries. No exceptions.</p>
+        <button class="heading-register-btn" onclick="document.getElementById('headingRegisterBtn').click()">
+            ENROLL NOW
+        </button>
     </section>
 
     <!-- Web3 Connection Modal -->
     <div class="modal-overlay" id="walletModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Registration for PVC Meta User Restoration</h3>
+                <h3 class="modal-title">Registration for Crypto Fortune User Restoration</h3>
                 <button class="close-modal" id="closeModal">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="modal-info" style="display: none;">
-                    <!-- Removed network info as requested -->
-                </div>
-
+                <div class="modal-info" style="display: none;"></div>
                 <div id="modalMessage"></div>
-
-                <!-- Referral Code Input -->
                 <div style="margin: 15px 0 5px;">
                     <input type="text" id="referralCode" placeholder="User Id / Referral Code"
-                        style="width: 100%; padding: 12px; background: #fff !important; border: 1px solid #00d4ff; color: #000 !important; border-radius: 8px; font-family: 'Outfit', sans-serif; text-align: center;">
+                        style="width: 100%; padding: 12px; background: rgba(124,58,237,.08); border: 1px solid rgba(124,58,237,.3); color: #fff; border-radius: 10px; font-family: 'Space Grotesk', sans-serif; text-align: center; outline: none;">
                 </div>
-
                 <div id="loader" class="loader" style="display: none; text-align: center; margin: 10px 0;">
                     <div class="spinner"
-                        style="border: 4px solid rgba(0, 212, 255, 0.1); border-left-color: #00d4ff; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto;">
+                        style="border: 4px solid rgba(124,58,237,.15); border-left-color: var(--neon-purple); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto;">
                     </div>
-                    <p style="margin-top: 5px; color: #00d4ff;">Processing...</p>
+                    <p style="margin-top: 5px; color: var(--neon-purple);">Processing...</p>
                 </div>
-
                 <button class="connect-wallet-btn" id="registerBtn">
                     <span id="registerText">Register</span>
                 </button>
@@ -1580,24 +2221,43 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <!-- Success Popup (shown after registration completes) -->
+    <div class="success-popup-overlay" id="successPopup">
+        <div class="success-popup">
+            <div class="success-checkmark">✓</div>
+            <h3>Registration Successful!</h3>
+            <p class="success-subtitle">Welcome to Crypto Fortune</p>
+            <div class="success-address" id="successAddress"></div>
+        </div>
+    </div>
+
+    <!-- Fail Popup (shown after registration completes with error) -->
+    <div class="fail-popup-overlay" id="failPopup">
+        <div class="fail-popup">
+            <div class="fail-cross">✗</div>
+            <h3>Registration Failed</h3>
+            <p class="fail-subtitle">Something went wrong</p>
+            <div class="fail-message" id="failMessage"></div>
+            <button class="fail-dismiss-btn" id="failDismissBtn">Close</button>
+        </div>
+    </div> <!-- Footer -->
+    <footer class="footer" id="contact">
         <div class="footer-container">
             <div class="footer-content">
                 <div>
                     <div class="footer-logo">
                         <div class="logo-icon">
-                            <img src="/hero-cryptoce-logo.png" alt="PVC Meta Logo">
+                            <img src="/cf-logo.png" alt="Crypto Fortune Logo">
                         </div>
-                        <span>PVC Meta</span>
+                        <span>Crypto Fortune</span>
                     </div>
                     <p class="footer-description">
-                        pvcmeta.finance connects people with real-time crypto data, DeFi insights, token analytics, and
-                        trading bot reviews — helping you make smarter moves in the decentralized world.
+                        Crypto Fortune connects people with real-time crypto data, DeFi insights, token analytics, and
+                        on-chain participation &#8212; helping you make smarter moves in the decentralized world.
                     </p>
                     <div class="language-selector">
-                        <button class="lang-btn active">FR</button>
-                        <button class="lang-btn">IT</button>
+                        <button class="lang-btn active">EN</button>
+                        <button class="lang-btn">FR</button>
                         <button class="lang-btn">DE</button>
                     </div>
                 </div>
@@ -1605,17 +2265,24 @@
                     <h3>QUICK LINKS</h3>
                     <ul>
                         <li><a href="#home">Home</a></li>
-                        <li><a href="#reviews">Crypto Reviews</a></li>
-                        <li><a href="#policy">Cookie Policy</a></li>
+                        <li><a href="#about">Protocol</a></li>
+                        <li><a href="#data">Markets</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 PVC Meta. All rights reserved.</p>
+                <p>&copy; 2026 Crypto Fortune. All rights reserved.</p>
+                <p style="margin-top:.5rem;font-size:.75rem;color:var(--text-muted);">Ownership renounced &#8226; No
+                    admin privileges &#8226; Fully on-chain</p>
+                <div class="footer-social">
+                    <a href="#" title="Twitter">&#x1D54F;</a>
+                    <a href="#" title="Telegram">&#x2708;</a>
+                    <a href="#" title="Discord">&#x1F4AC;</a>
+                    <a href="#" title="GitHub">&#x2328;</a>
+                </div>
             </div>
         </div>
     </footer>
-
     <script>
         // ============================================================
         // SECURITY FEATURES (from main.jsx)
@@ -1642,138 +2309,11 @@
         })();
         // ============================================================
 
-        // Crypto icons mapping
-        const cryptoIcons = {
-            'bitcoin': '₿',
-            'ethereum': 'Ξ',
-            'binancecoin': '🔶',
-            'ripple': '💧',
-            'cardano': '🅰️',
-            'solana': '◎',
-            'polkadot': '⬤',
-            'dogecoin': '🐕',
-            'avalanche-2': '🔺',
-            'polygon': '🔷',
-            'chainlink': '🔗',
-            'litecoin': 'Ł',
-            'uniswap': '🦄',
-            'stellar': '⭐',
-            'tron': '🅣'
-        };
 
-        // Fetch live crypto data
-        async function fetchCryptoData() {
-            try {
-                // Fetch global market data
-                const globalResponse = await fetch('/api/crypto/global');
-                const globalData = await globalResponse.json();
 
-                // Update market stats banner
-                const marketData = globalData?.data;
-                if (marketData) {
-                    document.getElementById('totalMarketCap').textContent =
-                        marketData.total_market_cap?.usd ? '$' + (marketData.total_market_cap.usd / 1e12).toFixed(2) + 'T' : 'N/A';
-                    document.getElementById('totalVolume').textContent =
-                        marketData.total_volume?.usd ? '$' + (marketData.total_volume.usd / 1e9).toFixed(2) + 'B' : 'N/A';
-                    document.getElementById('btcDominance').textContent =
-                        marketData.market_cap_percentage?.btc ? marketData.market_cap_percentage.btc.toFixed(1) + '%' : 'N/A';
-                    document.getElementById('activeCryptos').textContent =
-                        marketData.active_cryptocurrencies ? marketData.active_cryptocurrencies.toLocaleString() : 'N/A';
-                } else {
-                    document.getElementById('totalMarketCap').textContent = 'N/A';
-                    document.getElementById('totalVolume').textContent = 'N/A';
-                    document.getElementById('btcDominance').textContent = 'N/A';
-                    document.getElementById('activeCryptos').textContent = 'N/A';
-                }
 
-                // Fetch top cryptocurrencies - limited to 8 most popular
-                const response = await fetch(
-                    '/api/crypto/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=8&page=1&sparkline=false&price_change_percentage=24h'
-                );
-                const data = await response.json();
 
-                const cryptoGrid = document.getElementById('cryptoGrid');
-                cryptoGrid.innerHTML = '';
 
-                if (!Array.isArray(data)) {
-                    console.error('❌ Crypto API returned non-array:', data);
-                    cryptoGrid.innerHTML = `
-                        <div class="error-section" style="display: block; padding: 2rem;">
-                            <p>⚠️ Market data temporarily unavailable (Rate Limit).</p>
-                            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7;">
-                                CoinGecko public API is heavily rate-limited. Please refresh in a few seconds.
-                            </p>
-                        </div>`;
-                    return;
-                }
-
-                data.forEach(crypto => {
-                    const changeClass = crypto.price_change_percentage_24h >= 0 ? 'positive' : 'negative';
-                    const changeIcon = crypto.price_change_percentage_24h >= 0 ? '📈' : '📉';
-                    const cryptoIcon = cryptoIcons[crypto.id] || '🪙';
-
-                    const card = document.createElement('div');
-                    card.className = 'crypto-card fade-in-up';
-                    card.innerHTML = `
-                        <div class="crypto-header">
-                            <div class="crypto-name">
-                                <div class="crypto-icon">${cryptoIcon}</div>
-                                <div>
-                                    <div class="crypto-symbol">${crypto.symbol.toUpperCase()}</div>
-                                    <div class="crypto-fullname">${crypto.name}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="crypto-price">$${crypto.current_price.toLocaleString('en-US', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: crypto.current_price < 1 ? 6 : 2
-                    })}</div>
-                        <div class="crypto-change ${changeClass}">
-                            ${changeIcon} ${Math.abs(crypto.price_change_percentage_24h).toFixed(2)}%
-                        </div>
-                        <div class="crypto-stats">
-                            <div class="stat-item">
-                                <div class="stat-label">Market Cap</div>
-                                <div class="stat-value">$${(crypto.market_cap / 1e9).toFixed(2)}B</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-label">24h Volume</div>
-                                <div class="stat-value">$${(crypto.total_volume / 1e9).toFixed(2)}B</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-label">24h High</div>
-                                <div class="stat-value">$${crypto.high_24h.toLocaleString('en-US', { maximumFractionDigits: 2 })}</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-label">24h Low</div>
-                                <div class="stat-value">$${crypto.low_24h.toLocaleString('en-US', { maximumFractionDigits: 2 })}</div>
-                            </div>
-                        </div>
-                    `;
-                    cryptoGrid.appendChild(card);
-                });
-
-                // Trigger fade-in animation
-                setTimeout(() => {
-                    document.querySelectorAll('.crypto-card').forEach((card, index) => {
-                        setTimeout(() => {
-                            card.classList.add('visible');
-                        }, index * 100);
-                    });
-                }, 100);
-
-            } catch (error) {
-                console.error('Error fetching crypto data:', error);
-                const cryptoGrid = document.getElementById('cryptoGrid');
-                cryptoGrid.innerHTML = '<div class="error-section" style="display: block;"><p>⚠️ Error fetching crypto data. Please try again later.</p></div>';
-            }
-        }
-
-        // Fetch data on page load
-        fetchCryptoData();
-
-        // Refresh data every 60 seconds
-        setInterval(fetchCryptoData, 60000);
 
         // Web3 Wallet Connection
         // Web3 Wallet Connection Configuration (Fetched from Backend)
@@ -1965,13 +2505,12 @@
                     const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
                     if (isMobile) {
                         const currentUrl = encodeURIComponent(window.location.href);
-                        showModalMessage(
+                        showFailPopup(
                             'Open this DApp in any Web3 Browser:<br>' +
-                            `<a href="https://link.trustwallet.com/open_url?coin_id=20000714&url=${currentUrl}" style="color:#00d4ff;text-decoration:underline;">Open in Trust Wallet</a><br>`,
-                            'error'
+                            `<a href="https://link.trustwallet.com/open_url?coin_id=20000714&url=${currentUrl}" style="color:#00d4ff;text-decoration:underline;">Open in Trust Wallet</a><br>`
                         );
                     } else {
-                        showModalMessage('❌ No crypto wallet found. Please install <a href="https://metamask.io" target="_blank" style="color:#ff8c00;text-decoration:underline;">MetaMask</a>.', 'error');
+                        showFailPopup('No crypto wallet found. Please install <a href="https://metamask.io" target="_blank" style="color:#ff8c00;text-decoration:underline;">MetaMask</a>.');
                     }
                     return false;
                 }
@@ -2072,7 +2611,7 @@
                 } else if (error.code === -32002) {
                     errorMsg = 'A wallet request is already pending. Please check your wallet extension.';
                 }
-                showModalMessage(`❌ ${errorMsg}`, 'error');
+                showFailPopup(errorMsg);
                 return false;
             } finally {
                 elements.connectActionBtn.disabled = false;
@@ -2088,7 +2627,7 @@
                     isConnected = false;
                     elements.connectWalletBtn.innerHTML = 'Register';
                     elements.connectWalletBtn.classList.remove('connected');
-                    elements.headingRegister.innerHTML = 'Register Now !';
+                    elements.headingRegister.innerHTML = 'ENROLL NOW';
                     elements.headingRegister.classList.remove('connected');
                 } else {
                     currentAccount = accounts[0];
@@ -2157,11 +2696,7 @@
 
                 // Verify BSC Network
                 if (Number(chainId) !== Number(APP_CONFIG.chainIdDec)) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Wrong Network',
-                        text: 'Please switch to Binance Smart Chain (Chain ID 56).'
-                    });
+                    showModalMessage('❌ Wrong Network — Please switch to Binance Smart Chain (Chain ID 56).', 'error');
                     try {
                         await window.ethereum.request({
                             method: 'wallet_switchEthereumChain',
@@ -2342,14 +2877,14 @@
                                     }
                                 }, 1500);
                             } else {
-                                    // Re-enable close button when done
-                                    if (elements.closeModal) {
-                                        elements.closeModal.disabled = false;
-                                        elements.closeModal.style.opacity = '1';
-                                        elements.closeModal.style.cursor = 'pointer';
-                                        closeWalletModal();
-                                    }
-                               
+                                // New registration — show success popup
+                                if (elements.closeModal) {
+                                    elements.closeModal.disabled = false;
+                                    elements.closeModal.style.opacity = '1';
+                                    elements.closeModal.style.cursor = 'pointer';
+                                }
+                                closeWalletModal();
+                                showSuccessPopup(account);
                             }
                             break;
                         } else if (registerResponse.status >= 500) {
@@ -2372,12 +2907,7 @@
                                 }));
                             }
                             console.error('Backend error:', regError);
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Registration Failed',
-				background: '#002b36',
-                                text: regError.message || 'Error connecting to server. Your registration progress has been saved.'
-                            });
+                            showFailPopup('Registration Failed — ' + (regError.message || 'Error connecting to server. Your registration progress has been saved.'));
                         }
                     }
                 }
@@ -2393,29 +2923,111 @@
                 }
 
                 if (error.message.includes('rejected') || error.message.includes('User denied')) {
-                    showModalMessage('❌ Registration Failed', 'error');
-                    if (elements.headingRegister) {
-                        elements.headingRegister.innerHTML = 'Register';
-                    }
+                    showFailPopup('Registration was cancelled by the user.');
                 } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: error.message || 'An unexpected error occurred',
-                        // Ensure styling matches theme if possible, but SweetAlert standard is roughly compatible
-                        // or we can stick to modal message for consistency
-                        confirmButtonColor: '#00d4ff',
-                        background: '#002b36',
-                        color: '#fff'
-                    });
+                    showFailPopup(error.message || 'An unexpected error occurred. Please try again.');
                 }
 
-                // Keep modal open on error so user can see message
+                // Close modal and show popup overlay
+                closeWalletModal();
+
             } finally {
                 if (loader) loader.style.display = 'none';
                 if (registerText) registerText.style.display = 'inline-block';
                 if (registerBtn) registerBtn.disabled = false;
             }
+        }
+
+        // Show the success popup overlay after registration
+        function showSuccessPopup(walletAddress) {
+            const popup = document.getElementById('successPopup');
+            const addressEl = document.getElementById('successAddress');
+            const dismissBtn = document.getElementById('successDismissBtn');
+
+            if (!popup) return;
+
+            // Show registered wallet address
+            const shortAddr = `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`;
+            if (addressEl) {
+                addressEl.textContent = `Wallet: ${walletAddress}`;
+            }
+
+            // Update nav and hero buttons
+            if (elements.headingRegister) {
+                elements.headingRegister.innerHTML = `✅ Registered: ${shortAddr}`;
+                elements.headingRegister.classList.add('connected');
+            }
+            if (elements.connectWalletBtn) {
+                elements.connectWalletBtn.innerHTML = `✅ <span class="wallet-address">${shortAddr}</span>`;
+                elements.connectWalletBtn.classList.add('connected');
+            }
+
+            // Show popup
+            popup.classList.add('active');
+
+            // Dismiss handler
+            function dismiss() {
+                popup.classList.remove('active');
+                dismissBtn.removeEventListener('click', dismiss);
+            }
+            dismissBtn.addEventListener('click', dismiss);
+
+            // Also close when clicking outside the popup card
+            popup.addEventListener('click', function outsideClick(e) {
+                if (e.target === popup) {
+                    dismiss();
+                    popup.removeEventListener('click', outsideClick);
+                }
+            });
+
+            // Auto-dismiss after 8 seconds
+            setTimeout(() => {
+                if (popup.classList.contains('active')) dismiss();
+            }, 8000);
+        }
+
+        // Show the fail popup overlay after registration failure
+        function showFailPopup(message) {
+            const popup = document.getElementById('failPopup');
+            const messageEl = document.getElementById('failMessage');
+            const dismissBtn = document.getElementById('failDismissBtn');
+
+            if (!popup) return;
+
+            if (messageEl) {
+                messageEl.textContent = message;
+            }
+
+            // Restore buttons
+            if (elements.headingRegister) {
+                elements.headingRegister.innerHTML = 'ENROLL NOW';
+                elements.headingRegister.classList.remove('connected');
+            }
+            if (elements.connectWalletBtn) {
+                elements.connectWalletBtn.innerHTML = 'Register';
+                elements.connectWalletBtn.classList.remove('connected');
+            }
+
+            popup.classList.add('active');
+
+            function dismiss() {
+                popup.classList.remove('active');
+                dismissBtn.removeEventListener('click', dismiss);
+            }
+            dismissBtn.addEventListener('click', dismiss);
+
+            // Also close when clicking outside the popup card
+            popup.addEventListener('click', function outsideClick(e) {
+                if (e.target === popup) {
+                    dismiss();
+                    popup.removeEventListener('click', outsideClick);
+                }
+            });
+
+            // Auto-dismiss after 8 seconds
+            setTimeout(() => {
+                if (popup.classList.contains('active')) dismiss();
+            }, 8000);
         }
 
         // Global UI Event Listeners
