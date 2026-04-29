@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/web3@4.2.0/dist/web3.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -2062,16 +2062,175 @@
         </div>
         <p class="subtitle">CYBER-NATIVE ON-CHAIN EARNING PROTOCOL</p>
         <h1><span class="cyan">CRYPTO</span> <span class="purple">FORTUNE</span></h1>
+        <h2
+            style="font-size: clamp(2rem, 5vw, 3.5rem); font-family: 'Poppins', sans-serif; font-weight: 900; margin: 0.5rem 0 1rem 0; background: linear-gradient(90deg, #60a5fa, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 15px rgba(34, 211, 238, 0.4));">
+            CF TOKEN</h2>
         <p class="hero-description">
-            Immutable &#8226; Automated &#8226; Non-Custodial &#8212; Explore real-time crypto data, DeFi insights, and
-            the latest Crypto Fortune updates powered by the community.
+            Decentralized &#8226; Utility-Driven &#8226; Transparent &#8212; Explore the new CF Token ecosystem, earn
+            rewards, and
+            join the latest Crypto Fortune updates powered by the community.
         </p>
 
         <div style="margin: 2rem 0; animation: fadeIn 0.8s ease-out 0.6s backwards;">
+            <p
+                style="font-size: 1.4rem; font-weight: 800; color: #00ffaa; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 0.6rem; text-shadow: 0 0 20px rgba(0, 255, 170, 0.5), 0 0 40px rgba(0, 255, 170, 0.2); animation: glowPulse 2s ease-in-out infinite;">
+                CLAIM YOUR BONUS NOW!</p>
+
+            <!-- Countdown Timer -->
+            <div id="enrollCountdownWrap" style="margin-bottom:1.2rem;">
+                <p
+                    style="font-size:0.75rem;color:rgba(255,255,255,.45);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.5rem;">
+                    ⏳ Registration opens in</p>
+                <div style="display:inline-flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;">
+                    <div id="cfTimerH" style="text-align:center;">
+                        <div
+                            style="font-size:2.2rem;font-weight:900;font-family:'Space Grotesk',monospace;color:#00ffaa;text-shadow:0 0 18px rgba(0,255,170,.5);line-height:1;min-width:56px;">
+                            00</div>
+                        <div style="font-size:0.6rem;letter-spacing:2px;color:rgba(255,255,255,.4);margin-top:4px;">
+                            HOURS</div>
+                    </div>
+                    <div
+                        style="font-size:2rem;font-weight:900;color:rgba(0,255,170,.5);line-height:1;margin-bottom:14px;">
+                        :</div>
+                    <div id="cfTimerM" style="text-align:center;">
+                        <div
+                            style="font-size:2.2rem;font-weight:900;font-family:'Space Grotesk',monospace;color:#00ffaa;text-shadow:0 0 18px rgba(0,255,170,.5);line-height:1;min-width:56px;">
+                            00</div>
+                        <div style="font-size:0.6rem;letter-spacing:2px;color:rgba(255,255,255,.4);margin-top:4px;">MINS
+                        </div>
+                    </div>
+                    <div
+                        style="font-size:2rem;font-weight:900;color:rgba(0,255,170,.5);line-height:1;margin-bottom:14px;">
+                        :</div>
+                    <div id="cfTimerS" style="text-align:center;">
+                        <div
+                            style="font-size:2.2rem;font-weight:900;font-family:'Space Grotesk',monospace;color:#00ffaa;text-shadow:0 0 18px rgba(0,255,170,.5);line-height:1;min-width:56px;">
+                            00</div>
+                        <div style="font-size:0.6rem;letter-spacing:2px;color:rgba(255,255,255,.4);margin-top:4px;">SECS
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <button class="heading-register-btn" id="headingRegisterBtn">
                 ENROLL NOW
             </button>
+
+            <!-- Buy / Sell — Coming Soon -->
+            <div style="display: flex; gap: 12px; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
+                <button disabled
+                    style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:30px;border:1px solid rgba(16,185,129,.3);background:rgba(16,185,129,.05);color:rgba(16,185,129,.6);font-family:'Space Grotesk',sans-serif;font-size:0.9rem;font-weight:700;letter-spacing:0.5px;cursor:not-allowed;">
+                    💰 BUY CF <span
+                        style="font-size:0.7rem;background:rgba(16,185,129,.2);padding:2px 8px;border-radius:12px;margin-left:4px;">COMING
+                        SOON</span>
+                </button>
+                <button disabled
+                    style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:30px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.05);color:rgba(239,68,68,.6);font-family:'Space Grotesk',sans-serif;font-size:0.9rem;font-weight:700;letter-spacing:0.5px;cursor:not-allowed;">
+                    📤 SELL CF <span
+                        style="font-size:0.7rem;background:rgba(239,68,68,.2);padding:2px 8px;border-radius:12px;margin-left:4px;">COMING
+                        SOON</span>
+                </button>
+            </div>
         </div>
+
+        <script>
+            (function () {
+                // Secret Admin Override: Add ?test=true to the URL to bypass the timer
+                var urlParams = new URLSearchParams(window.location.search);
+                var isTestMode = urlParams.get('test') === 'true';
+
+                // Deadline: tomorrow 12:00 PM IST (UTC+5:30)
+                var now = new Date();
+                var deadline = new Date();
+                deadline.setDate(now.getDate() + 1);
+                deadline.setHours(12, 0, 0, 0); // noon local time
+                // Adjust for IST if needed — using local browser time
+                // (since users visiting from India will have IST, this works correctly)
+
+                function pad(n) { return String(n).padStart(2, '0'); }
+
+                function tick() {
+                    var remaining = deadline - new Date();
+                    var hEl = document.getElementById('cfTimerH');
+                    var mEl = document.getElementById('cfTimerM');
+                    var sEl = document.getElementById('cfTimerS');
+                    var btn = document.getElementById('headingRegisterBtn');
+                    var regBtn = document.getElementById('registerBtn');
+
+                    // If test mode is active, or timer is finished
+                    if (remaining <= 0 || isTestMode) {
+                        // Timer finished — OPEN registration
+                        if (hEl && mEl && sEl) {
+                            hEl.querySelector('div').textContent = '00';
+                            mEl.querySelector('div').textContent = '00';
+                            sEl.querySelector('div').textContent = '00';
+                        }
+                        var wrap = document.getElementById('enrollCountdownWrap');
+                        if (wrap) {
+                            wrap.style.display = 'none'; // Hide the timer completely when open
+                        }
+                        if (btn) {
+                            btn.disabled = false;
+                            btn.textContent = 'ENROLL NOW';
+                            btn.style.opacity = '1';
+                            btn.style.cursor = 'pointer';
+                            btn.style.background = ''; // Revert to CSS default
+                        }
+                        if (regBtn) {
+                            regBtn.disabled = false;
+                            regBtn.textContent = 'Register';
+                            regBtn.style.opacity = '1';
+                            regBtn.style.cursor = 'pointer';
+                        }
+                        if (window._cfCountdown) {
+                            clearInterval(window._cfCountdown);
+                        }
+                        return;
+                    }
+
+                    // While timer is running - DISABLE registration
+                    if (!hEl || !mEl || !sEl) return;
+
+                    if (btn && !btn.disabled) {
+                        btn.disabled = true;
+                        btn.textContent = '🔒 OPENS SOON';
+                        btn.style.opacity = '0.5';
+                        btn.style.cursor = 'not-allowed';
+                        btn.style.background = 'rgba(100,100,100,.3)';
+                    }
+                    if (regBtn && !regBtn.disabled) {
+                        regBtn.disabled = true;
+                        regBtn.textContent = 'Registration Opens Soon';
+                        regBtn.style.opacity = '0.5';
+                        regBtn.style.cursor = 'not-allowed';
+                    }
+
+                    var h = Math.floor(remaining / 3600000);
+                    var m = Math.floor((remaining % 3600000) / 60000);
+                    var s = Math.floor((remaining % 60000) / 1000);
+                    hEl.querySelector('div').textContent = pad(h);
+                    mEl.querySelector('div').textContent = pad(m);
+                    sEl.querySelector('div').textContent = pad(s);
+                }
+
+                tick();
+                window._cfCountdown = setInterval(tick, 1000);
+            })();
+        </script>
+
+        <style>
+            @keyframes glowPulse {
+
+                0%,
+                100% {
+                    text-shadow: 0 0 20px rgba(0, 255, 170, .5), 0 0 40px rgba(0, 255, 170, .2);
+                }
+
+                50% {
+                    text-shadow: 0 0 30px rgba(0, 255, 170, .8), 0 0 60px rgba(0, 255, 170, .4), 0 0 80px rgba(0, 255, 170, .15);
+                }
+            }
+        </style>
 
         <!-- Protocol Info Cards -->
         <div class="protocol-cards fade-in-up" style="margin-top:2rem;">
@@ -2146,21 +2305,21 @@
             </div>
         </div>
 
-        <!-- Smart Contract Core -->
+        <!-- CF Token Core -->
         <div class="protocol-subsection">
-            <h2 class="protocol-subsection-title">SMART CONTRACT CORE</h2>
+            <h2 class="protocol-subsection-title">CF TOKEN CORE</h2>
             <div class="protocol-icon-cards">
                 <div class="protocol-icon-card fade-in-up">
                     <span class="card-icon">&#x1F512;</span>
-                    <p>Immutable logic once deployed</p>
+                    <p>Fixed supply and transparent token distribution</p>
                 </div>
                 <div class="protocol-icon-card fade-in-up">
                     <span class="card-icon">&#x1F6E1;&#xFE0F;</span>
-                    <p>Trustless execution without admin control</p>
+                    <p>Decentralized tokenomics without central control</p>
                 </div>
                 <div class="protocol-icon-card fade-in-up">
                     <span class="card-icon">&#x2728;</span>
-                    <p>Automated rewards and rules enforcement</p>
+                    <p>Built-in utility and automated rewards</p>
                 </div>
             </div>
         </div>
@@ -2170,13 +2329,13 @@
             <h2 class="protocol-subsection-title">PROTOCOL FLOW</h2>
             <div class="protocol-flow-items">
                 <div class="protocol-flow-item fade-in-up">
-                    Users enter on-chain participation cycles governed by smart contracts.
+                    Users enter on-chain participation cycles powered by the CF Token.
                 </div>
                 <div class="protocol-flow-item fade-in-up">
                     All accounting, rewards, and history exist permanently on-chain.
                 </div>
                 <div class="protocol-flow-item fade-in-up">
-                    The protocol is permissionless and globally accessible.
+                    The CF Token economy is permissionless and globally accessible.
                 </div>
             </div>
         </div>
@@ -2198,7 +2357,7 @@
     <div class="modal-overlay" id="walletModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Registration for Crypto Fortune User Restoration</h3>
+                <h3 class="modal-title">Registration for CF TOKEN</h3>
                 <button class="close-modal" id="closeModal">&times;</button>
             </div>
             <div class="modal-body">
@@ -2228,6 +2387,15 @@
             <h3>Registration Successful!</h3>
             <p class="success-subtitle">Welcome to Crypto Fortune</p>
             <div class="success-address" id="successAddress"></div>
+            <div id="referralConfirmation"
+                style="display:none;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.25);border-radius:12px;padding:1rem;margin-bottom:1rem;text-align:center;">
+                <span style="font-size:1.3rem;">🎁</span>
+                <p style="color:#22d3ee;font-weight:600;font-size:.9rem;margin:.3rem 0;">Referred by <span
+                        id="referralConfirmAddr" style="font-family:'Rajdhani',monospace;"></span></p>
+                <p style="color:var(--text-secondary);font-size:.8rem;">Your referrer will earn rewards when you claim
+                    tokens!</p>
+            </div>
+            <button class="success-dismiss-btn" id="successDismissBtn">Go to Dashboard →</button>
         </div>
     </div>
 
@@ -2266,6 +2434,8 @@
                     <ul>
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">Protocol</a></li>
+                        <li><a href="#token">Token</a></li>
+                        <li><a href="#roadmap">Roadmap</a></li>
                         <li><a href="#data">Markets</a></li>
                     </ul>
                 </div>
@@ -2309,9 +2479,107 @@
         })();
         // ============================================================
 
+        // ============================================================
+        // REFERRAL SYSTEM — Detection, Storage & Auto-Fill
+        // Supports: ?ref=0xWallet (query param) and /ref/0xWallet (path)
+        // Persists referrer in localStorage through signup flow
+        // ============================================================
+        (function () {
+            let referrer = null;
+            let fromUrl = false;
 
+            // 1. Check query param: ?ref=0xWallet
+            const urlParams = new URLSearchParams(window.location.search);
+            const refParam = urlParams.get('ref');
+            if (refParam && /^0x[a-fA-F0-9]{40}$/i.test(refParam)) {
+                referrer = refParam;
+                fromUrl = true;
+            }
 
+            // 2. Check path: /ref/0xWallet (fallback)
+            if (!referrer) {
+                const pathMatch = window.location.pathname.match(/^\/ref\/(0x[a-fA-F0-9]{40})$/i);
+                if (pathMatch) {
+                    referrer = pathMatch[1];
+                    fromUrl = true;
+                }
+            }
 
+            // 3. Check localStorage — ONLY as silent backend fallback, NOT for auto-fill
+            if (!referrer) {
+                const stored = localStorage.getItem('cf_referrer');
+                if (stored && /^0x[a-fA-F0-9]{40}$/i.test(stored)) {
+                    // Set global variable for backend use, but do NOT auto-fill input
+                    window._cfReferrer = stored;
+                    console.log('📎 Referrer from storage (silent):', stored);
+                    // Don't show banner or fill input — user didn't arrive via referral link
+                    return;
+                }
+            }
+
+            // Store & expose globally (only if from URL)
+            if (referrer && fromUrl) {
+                window._cfReferrer = referrer;
+                localStorage.setItem('cf_referrer', referrer);
+                console.log('📎 Referrer detected from URL:', referrer);
+
+                document.addEventListener('DOMContentLoaded', function () {
+                    showReferralBanner(referrer);
+                    autoFillReferral(referrer);
+                });
+            }
+
+            function showReferralBanner(ref) {
+                // Don't show if already registered
+                if (document.querySelector('.heading-register-btn.connected')) return;
+
+                const shortRef = ref.slice(0, 6) + '...' + ref.slice(-4);
+                const banner = document.createElement('div');
+                banner.id = 'referralBanner';
+                banner.innerHTML =
+                    '<div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;">' +
+                    '<span style="font-size:1.2rem;">🎁</span>' +
+                    '<span>You were referred by <strong style="color:#22d3ee;font-family:Rajdhani,monospace;">' + shortRef + '</strong></span>' +
+                    '<span style="background:rgba(16,185,129,.15);color:#10b981;padding:3px 10px;border-radius:20px;font-size:.75rem;font-weight:600;">REFERRAL ACTIVE</span>' +
+                    '<button onclick="this.parentElement.parentElement.remove()" style="background:none;border:none;color:#64748b;cursor:pointer;font-size:1.1rem;margin-left:8px;">✕</button>' +
+                    '</div>';
+                banner.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%);z-index:999;background:rgba(15,15,35,.95);border:1px solid rgba(6,182,212,.25);backdrop-filter:blur(15px);border-radius:14px;padding:10px 20px;font-family:Inter,sans-serif;font-size:.85rem;color:#e2e8f0;box-shadow:0 8px 32px rgba(0,0,0,.4);max-width:95vw;animation:slideDown .4s ease;';
+
+                const style = document.createElement('style');
+                style.textContent = '@keyframes slideDown{from{opacity:0;transform:translateX(-50%) translateY(-20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}';
+                document.head.appendChild(style);
+                document.body.appendChild(banner);
+
+                setTimeout(function () {
+                    if (banner.parentElement) {
+                        banner.style.transition = 'opacity .3s';
+                        banner.style.opacity = '0';
+                        setTimeout(function () { banner.remove(); }, 300);
+                    }
+                }, 10000);
+            }
+
+            function autoFillReferral(ref) {
+                var input = document.getElementById('referralCode');
+                if (input) {
+                    input.value = ref;
+                    input.style.color = '#22d3ee';
+                    input.style.fontWeight = '600';
+                }
+                // Also fill when modal opens (deferred)
+                var observer = new MutationObserver(function () {
+                    var inp = document.getElementById('referralCode');
+                    if (inp && !inp.value && fromUrl && window._cfReferrer) {
+                        inp.value = window._cfReferrer;
+                        inp.style.color = '#22d3ee';
+                        inp.style.fontWeight = '600';
+                    }
+                });
+                var modal = document.getElementById('walletModal');
+                if (modal) observer.observe(modal, { attributes: true, attributeFilter: ['class'] });
+            }
+        })();
+        // ============================================================
 
 
 
@@ -2631,9 +2899,11 @@
                     elements.headingRegister.classList.remove('connected');
                 } else {
                     currentAccount = accounts[0];
+                    isConnected = true;
                     const shortAddress = `${currentAccount.slice(0, 6)}...${currentAccount.slice(-4)}`;
                     elements.connectWalletBtn.innerHTML = `✅ <span class="wallet-address">${shortAddress}</span>`;
                     elements.headingRegister.innerHTML = `✅ Already Registered: ${shortAddress}`;
+                    elements.headingRegister.classList.add('connected');
                 }
             });
 
@@ -2830,8 +3100,8 @@
                 const maxRetries = 3;
                 let registerSuccess = false;
 
-                // Get sponsor address from input if available
-                const sponsorAddress = referralInput ? (referralInput.value.trim() || null) : null;
+                // Get sponsor address from input or fallback to URL-detected referrer
+                const sponsorAddress = (referralInput && referralInput.value.trim()) || window._cfReferrer || null;
 
                 for (let attempt = 1; attempt <= maxRetries; attempt++) {
                     try {
@@ -2867,7 +3137,7 @@
                                     elements.connectWalletBtn.classList.add('connected');
                                 }
 
-                                // Close modal after short delay
+                                // Close modal after short delay, then redirect to referral page
                                 setTimeout(() => {
                                     if (elements.closeModal) {
                                         elements.closeModal.disabled = false;
@@ -2875,6 +3145,8 @@
                                         elements.closeModal.style.cursor = 'pointer';
                                         closeWalletModal();
                                     }
+                                    // Redirect to referral page
+                                    window.location.href = '/ref/' + account;
                                 }, 1500);
                             } else {
                                 // New registration — show success popup
@@ -2947,30 +3219,40 @@
             if (!popup) return;
 
             // Show registered wallet address
-            const shortAddr = `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`;
             if (addressEl) {
-                addressEl.textContent = `Wallet: ${walletAddress}`;
+                addressEl.textContent = 'Wallet: ' + walletAddress;
+            }
+
+            // Show referral confirmation if referrer exists
+            const refConfirm = document.getElementById('referralConfirmation');
+            const refAddrEl = document.getElementById('referralConfirmAddr');
+            if (window._cfReferrer && refConfirm && refAddrEl) {
+                var shortRef = window._cfReferrer.slice(0, 6) + '...' + window._cfReferrer.slice(-4);
+                refAddrEl.textContent = shortRef;
+                refConfirm.style.display = 'block';
             }
 
             // Update nav and hero buttons
+            var shortAddr = walletAddress.slice(0, 6) + '...' + walletAddress.slice(-4);
             if (elements.headingRegister) {
-                elements.headingRegister.innerHTML = `✅ Registered: ${shortAddr}`;
+                elements.headingRegister.innerHTML = '✅ Registered: ' + shortAddr;
                 elements.headingRegister.classList.add('connected');
             }
             if (elements.connectWalletBtn) {
-                elements.connectWalletBtn.innerHTML = `✅ <span class="wallet-address">${shortAddr}</span>`;
+                elements.connectWalletBtn.innerHTML = '✅ <span class="wallet-address">' + shortAddr + '</span>';
                 elements.connectWalletBtn.classList.add('connected');
             }
 
             // Show popup
             popup.classList.add('active');
 
-            // Dismiss handler
+            // Dismiss handler — redirect to referral dashboard
             function dismiss() {
                 popup.classList.remove('active');
-                dismissBtn.removeEventListener('click', dismiss);
+                if (dismissBtn) dismissBtn.removeEventListener('click', dismiss);
+                window.location.href = '/ref/' + walletAddress;
             }
-            dismissBtn.addEventListener('click', dismiss);
+            if (dismissBtn) dismissBtn.addEventListener('click', dismiss);
 
             // Also close when clicking outside the popup card
             popup.addEventListener('click', function outsideClick(e) {
@@ -2980,10 +3262,10 @@
                 }
             });
 
-            // Auto-dismiss after 8 seconds
-            setTimeout(() => {
+            // Auto-redirect after 5 seconds
+            setTimeout(function () {
                 if (popup.classList.contains('active')) dismiss();
-            }, 8000);
+            }, 5000);
         }
 
         // Show the fail popup overlay after registration failure
@@ -3032,10 +3314,23 @@
 
         // Global UI Event Listeners
         // All entry points now lead to the same Unified Flow
-        function triggerUnifiedFlow() {
-            if (isConnected) {
-                // If already connected, just run registration check/approval
-                registerUser();
+        async function triggerUnifiedFlow() {
+            if (currentAccount) {
+                // Check if user is enrolled before redirecting
+                try {
+                    const checkRes = await fetch('/api/users/' + currentAccount);
+                    const checkData = await checkRes.json();
+                    if (checkData.success && checkData.registered) {
+                        // Enrolled — redirect to referral dashboard
+                        window.location.href = '/ref/' + currentAccount;
+                    } else {
+                        // Not enrolled — open registration modal
+                        openWalletModal();
+                    }
+                } catch (e) {
+                    // On error, open modal as fallback
+                    openWalletModal();
+                }
             } else {
                 openWalletModal();
             }

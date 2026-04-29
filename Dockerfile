@@ -28,6 +28,7 @@ COPY --from=builder /app/.env.example .
 # Copy other necessary files
 COPY --from=builder /app/script.js .
 COPY --from=builder /app/style.css .
+COPY --from=builder /app/referral.html .
 COPY --from=builder /app/*.png .
 COPY --from=builder /app/*.svg .
 COPY --from=builder /app/*.ico .

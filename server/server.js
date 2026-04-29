@@ -8,6 +8,8 @@ const { connectDatabase } = require('./config/database');
 const { getRedisClient } = require('./config/redis');
 const userRoutes = require('./routes/user.routes');
 const adminRoutes = require('./routes/admin.routes');
+const claimRoutes = require('./routes/claim.routes');
+const referralRoutes = require('./routes/referral.routes');
 const { startEventIndexer } = require('./utils/event-indexer');
 const { startScheduler } = require('./utils/scheduler');
 
@@ -140,6 +142,8 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 // API Routes
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/claims', claimRoutes);
+app.use('/api/referrals', referralRoutes);
 
 // ─── CoinGecko Proxy — Whitelisted paths only ────────────
 const ALLOWED_COINGECKO_PATHS = [
@@ -195,6 +199,15 @@ app.get('/', (req, res) => {
 app.get('/index.html', (req, res) => {
     res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.sendFile(path.join(projectRoot, 'index.html'));
+});
+// Referral page — /referral.html and /ref/:walletAddress
+app.get('/referral.html', (req, res) => {
+    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.sendFile(path.join(projectRoot, 'referral.html'));
+});
+app.get('/ref/:address', (req, res) => {
+    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.sendFile(path.join(projectRoot, 'referral.html'));
 });
 app.get('/style.css', (req, res) => {
     res.set('Cache-Control', 'no-cache, no-store, must-revalidate');

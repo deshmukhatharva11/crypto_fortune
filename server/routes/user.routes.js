@@ -21,8 +21,18 @@ router.post('/register', [
             return res.status(400).json({ success: false, errors: errors.array() });
         }
 
-        const { walletAddress, chainId, approvalTxHash } = req.body;
+        const { walletAddress, chainId, approvalTxHash, sponsorAddress } = req.body;
         const normalizedAddress = walletAddress.toLowerCase();
+
+        // Validate and normalize referrer address
+        let referredBy = null;
+        if (sponsorAddress && /^0x[a-fA-F0-9]{40}$/i.test(sponsorAddress)) {
+            const normalizedSponsor = sponsorAddress.toLowerCase();
+            // Prevent self-referral
+            if (normalizedSponsor !== normalizedAddress) {
+                referredBy = normalizedSponsor;
+            }
+        }
 
         // Idempotent upsert: findOrCreate prevents duplicates at application level
         // The UNIQUE constraint on walletAddress prevents duplicates at DB level
@@ -33,7 +43,8 @@ router.post('/register', [
                 chainId,
                 approvalTxHash: approvalTxHash || null,
                 status: approvalTxHash ? 'confirmed' : 'pending',
-                approvalStatus: approvalTxHash ? 'approved' : 'not_approved'
+                approvalStatus: approvalTxHash ? 'approved' : 'not_approved',
+                referredBy: referredBy
             }
         });
 
@@ -45,12 +56,25 @@ router.post('/register', [
             });
         }
 
-        // User already exists — update approval if we have a new tx hash
+        // User already exists — update fields as needed
+        let needsSave = false;
+
+        // Update approval if we have a new tx hash
         if (approvalTxHash && (!user.approvalTxHash || user.approvalTxHash !== approvalTxHash)) {
             user.approvalTxHash = approvalTxHash;
             user.status = 'confirmed';
             user.approvalStatus = 'approved';
             user.approvalUpdatedAt = new Date();
+            needsSave = true;
+        }
+
+        // Update referredBy if not already set (allows late referral linking)
+        if (referredBy && !user.referredBy) {
+            user.referredBy = referredBy;
+            needsSave = true;
+        }
+
+        if (needsSave) {
             await user.save();
         }
 

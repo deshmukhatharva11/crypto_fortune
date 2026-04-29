@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Fortune | Referral Dashboard</title>
+    <meta name="description" content="Claim your Crypto Fortune (CF) tokens and earn referral rewards.">
+    <link rel="icon" type="image/png" href="/cf-logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/web3@4.2.0/dist/web3.min.js"></script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg-primary:#050510;--bg-secondary:#0a0a1a;
+            --bg-card:rgba(15,15,35,.7);--purple:#7c3aed;--blue:#3b82f6;
+            --cyan:#06b6d4;--green:#10b981;--neon-purple:#a855f7;
+            --neon-cyan:#22d3ee;--text-primary:#e2e8f0;--text-secondary:#94a3b8;
+            --text-muted:#64748b;--card-border:rgba(124,58,237,.15);
+            --border-glow:rgba(124,58,237,.3);
+        }
+        body{font-family:'Inter','Poppins',sans-serif;background:var(--bg-primary);color:var(--text-primary);min-height:100vh;overflow-x:hidden;line-height:1.6}
+
+        .ref-nav{background:rgba(5,5,16,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--card-border);padding:1rem 2rem;position:fixed;width:100%;top:0;z-index:1000}
+        .ref-nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+        .ref-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;font-family:'Inter',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:2px;text-transform:uppercase}
+        .ref-logo img{height:36px;filter:drop-shadow(0 0 8px rgba(124,58,237,.6))}
+        .wallet-badge{padding:.5rem 1.2rem;background:linear-gradient(135deg,var(--green),#059669);border:none;border-radius:10px;color:#fff;font-family:'Rajdhani',monospace;font-weight:600;font-size:.85rem;cursor:default;box-shadow:0 0 15px rgba(16,185,129,.3)}
+        .ref-wallet-btn{padding:.6rem 1.4rem;background:linear-gradient(135deg,var(--purple),var(--blue));border:none;border-radius:10px;color:#fff;font-family:'Inter',sans-serif;font-weight:600;font-size:.85rem;cursor:pointer;transition:all .3s;box-shadow:0 0 20px rgba(124,58,237,.3)}
+        .ref-wallet-btn:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(124,58,237,.5)}
+
+        .ref-container{max-width:860px;margin:0 auto;padding:6rem 1.5rem 3rem}
+        .ref-header{text-align:center;margin-bottom:2rem}
+        .ref-header h1{font-family:'Poppins',sans-serif;font-size:clamp(1.4rem,3.5vw,2rem);font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:3px;margin-bottom:.5rem;text-shadow:0 0 20px rgba(124,58,237,.3)}
+        .ref-header p{color:var(--text-muted);font-family:'Inter',sans-serif;font-size:.9rem}
+
+        .ref-card{background:var(--bg-card);border:1px solid var(--card-border);border-radius:16px;padding:1.5rem;margin-bottom:1.2rem;backdrop-filter:blur(12px);transition:all .3s}
+        .ref-card:hover{border-color:var(--border-glow);box-shadow:0 0 25px rgba(124,58,237,.06)}
+        .ref-card-title{font-family:'Inter',sans-serif;font-size:.8rem;font-weight:600;color:var(--neon-purple);text-transform:uppercase;letter-spacing:2px;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+
+        .wallet-display{font-family:'Rajdhani',monospace;font-size:.88rem;color:var(--text-secondary);background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.15);border-radius:10px;padding:.7rem 1rem;word-break:break-all}
+
+        .ref-link-box{display:flex;gap:.5rem;align-items:stretch}
+        .ref-link-input{flex:1;font-family:'Rajdhani',monospace;font-size:.82rem;color:var(--neon-cyan);background:rgba(6,182,212,.04);border:1px solid rgba(6,182,212,.15);border-radius:10px;padding:.7rem;outline:none}
+        .ref-copy-btn{padding:.7rem 1.2rem;background:linear-gradient(135deg,var(--cyan),#0891b2);border:none;border-radius:10px;color:#fff;font-family:'Inter',sans-serif;font-weight:600;font-size:.8rem;cursor:pointer;transition:all .3s;white-space:nowrap}
+        .ref-copy-btn:hover{transform:translateY(-1px);box-shadow:0 0 15px rgba(6,182,212,.3)}
+        .ref-copy-btn.copied{background:linear-gradient(135deg,var(--green),#059669)}
+
+        .claim-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+        @media(max-width:540px){.claim-grid{grid-template-columns:1fr}}
+        .claim-card{background:rgba(15,15,40,.5);border:1px solid rgba(124,58,237,.15);border-radius:14px;padding:1.3rem;text-align:center;transition:all .3s}
+        .claim-card:hover{border-color:rgba(124,58,237,.3)}
+        .claim-amount{font-family:'Poppins',sans-serif;font-size:1.8rem;font-weight:700;color:#fff;margin-bottom:.2rem}
+        .claim-label{font-family:'Inter',sans-serif;color:var(--text-muted);font-size:.8rem;margin-bottom:.8rem}
+        .claim-btn{width:100%;padding:.8rem;border:none;border-radius:12px;color:#fff;font-family:'Inter',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .3s}
+        .claim-btn.old{background:linear-gradient(135deg,#7c3aed,#6d28d9);box-shadow:0 0 15px rgba(124,58,237,.25)}
+        .claim-btn.new{background:linear-gradient(135deg,var(--blue),#2563eb);box-shadow:0 0 15px rgba(59,130,246,.25)}
+        .claim-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 4px 20px rgba(124,58,237,.35)}
+        .claim-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+        .claim-btn.claimed{background:linear-gradient(135deg,var(--green),#059669)!important;box-shadow:0 0 15px rgba(16,185,129,.25)!important;cursor:default}
+        .status-badge{display:inline-block;padding:.25rem .7rem;border-radius:20px;font-family:'Inter',sans-serif;font-size:.7rem;font-weight:600;margin-bottom:.6rem}
+        .status-badge.unclaimed{background:rgba(124,58,237,.12);color:var(--neon-purple)}
+        .status-badge.claimed{background:rgba(16,185,129,.12);color:var(--green)}
+
+        /* Stats grid */
+        .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin-top:1rem}
+        @media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+        .stat-item{text-align:center;padding:.8rem .5rem;background:rgba(124,58,237,.04);border-radius:10px;border:1px solid rgba(124,58,237,.08)}
+        .stat-value{font-family:'Poppins',sans-serif;font-size:.95rem;font-weight:600;color:#fff}
+        .stat-label{font-family:'Inter',sans-serif;font-size:.6rem;color:var(--text-muted);margin-top:.2rem;text-transform:uppercase;letter-spacing:1.5px}
+
+        /* Referral rewards highlight */
+        .rewards-highlight{background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(6,182,212,.06));border:1px solid rgba(124,58,237,.2);border-radius:14px;padding:1.2rem;margin-top:1rem}
+        .rewards-highlight h4{font-family:'Inter',sans-serif;font-size:.8rem;font-weight:600;color:var(--neon-cyan);text-transform:uppercase;letter-spacing:2px;margin-bottom:.8rem}
+        .reward-row{display:flex;justify-content:space-between;align-items:center;padding:.4rem 0;border-bottom:1px solid rgba(124,58,237,.06)}
+        .reward-row:last-child{border:none}
+        .reward-row span{font-family:'Inter',sans-serif;font-size:.82rem;color:var(--text-secondary)}
+        .reward-row strong{font-family:'Rajdhani',monospace;font-size:.9rem;color:#fff}
+
+        .ref-levels table{width:100%;border-collapse:collapse}
+        .ref-levels th,.ref-levels td{padding:.4rem .6rem;text-align:center;font-family:'Inter',sans-serif;font-size:.78rem;border-bottom:1px solid rgba(124,58,237,.08)}
+        .ref-levels th{color:var(--neon-purple);font-weight:600;text-transform:uppercase;letter-spacing:1.5px;font-size:.65rem}
+        .ref-levels td{color:var(--text-secondary)}
+        .ref-levels tr:hover td{color:#fff;background:rgba(124,58,237,.04)}
+
+        .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:rgba(15,15,35,.95);border:1px solid var(--card-border);border-radius:12px;padding:.8rem 1.3rem;color:var(--text-primary);font-family:'Inter',sans-serif;font-size:.85rem;z-index:9999;transition:transform .3s,opacity .3s;opacity:0;backdrop-filter:blur(10px);box-shadow:0 10px 40px rgba(0,0,0,.5);max-width:90vw}
+        .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+        .toast.success{border-color:rgba(16,185,129,.3)}
+        .toast.error{border-color:rgba(239,68,68,.3)}
+        .spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-left-color:#fff;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .ref-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;background:radial-gradient(ellipse at 30% 20%,rgba(124,58,237,.06) 0%,transparent 50%),radial-gradient(ellipse at 70% 80%,rgba(6,182,212,.04) 0%,transparent 50%),var(--bg-primary)}
+        .connect-prompt{text-align:center;padding:2.5rem 2rem}
+        .connect-prompt p{color:var(--text-muted);margin-bottom:1.2rem;font-size:.95rem}
+
+        /* ─── Referral Bonus Claim Section ─── */
+        .bonus-card{background:linear-gradient(145deg,rgba(15,15,40,.8),rgba(10,20,35,.9));border:1px solid rgba(16,185,129,.2);border-radius:16px;padding:1.5rem;margin-bottom:1.2rem;backdrop-filter:blur(12px);position:relative;overflow:hidden}
+        .bonus-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),var(--cyan),var(--green));opacity:.6}
+        .bonus-card:hover{border-color:rgba(16,185,129,.35);box-shadow:0 0 30px rgba(16,185,129,.08)}
+        .bonus-title{font-family:'Inter',sans-serif;font-size:.8rem;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:2px;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+        .bonus-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-bottom:1.2rem}
+        @media(max-width:600px){.bonus-stats{grid-template-columns:repeat(2,1fr)}}
+        .bonus-stat{text-align:center;padding:.8rem .4rem;background:rgba(16,185,129,.04);border-radius:10px;border:1px solid rgba(16,185,129,.1);transition:all .3s}
+        .bonus-stat:hover{border-color:rgba(16,185,129,.25);background:rgba(16,185,129,.08)}
+        .bonus-stat-value{font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.15rem}
+        .bonus-stat-value.pending-val{color:var(--neon-cyan);text-shadow:0 0 10px rgba(34,211,238,.3)}
+        .bonus-stat-label{font-family:'Inter',sans-serif;font-size:.6rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px}
+        .bonus-claim-area{display:flex;align-items:center;gap:1rem;padding:1rem;background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.12);border-radius:12px}
+        @media(max-width:540px){.bonus-claim-area{flex-direction:column}}
+        .bonus-pending-display{flex:1}
+        .bonus-pending-label{font-family:'Inter',sans-serif;font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.2rem}
+        .bonus-pending-amount{font-family:'Poppins',sans-serif;font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,var(--green),var(--neon-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .bonus-claim-btn{padding:.9rem 2rem;border:none;border-radius:12px;color:#fff;font-family:'Inter',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .3s;white-space:nowrap;min-width:200px;text-align:center}
+        .bonus-claim-btn.active{background:linear-gradient(135deg,var(--green),#059669);box-shadow:0 0 20px rgba(16,185,129,.3)}
+        .bonus-claim-btn.active:hover{transform:translateY(-2px);box-shadow:0 4px 25px rgba(16,185,129,.45)}
+        .bonus-claim-btn.disabled{background:rgba(100,116,139,.2);color:var(--text-muted);cursor:not-allowed;box-shadow:none}
+        .bonus-claim-btn.success{background:linear-gradient(135deg,var(--green),#059669)!important;box-shadow:0 0 20px rgba(16,185,129,.4)!important}
+        .bonus-tx-hash{margin-top:.8rem;font-family:'Rajdhani',monospace;font-size:.78rem;color:var(--text-muted)}
+        .bonus-tx-hash a{color:var(--neon-cyan);text-decoration:none}
+        .bonus-tx-hash a:hover{text-decoration:underline}
+    </style>
+</head>
+<body>
+    <div class="ref-bg"></div>
+    <nav class="ref-nav">
+        <div class="ref-nav-inner">
+            <a href="/" class="ref-logo"><img src="/cf-logo.png" alt="CF"><span>CRYPTO FORTUNE</span></a>
+            <div id="navWallet"><button class="ref-wallet-btn" id="walletBtn" onclick="connectWallet()">Connect Wallet</button></div>
+        </div>
+    </nav>
+
+    <div class="ref-container">
+        <div class="ref-header">
+            <h1>Referral Dashboard</h1>
+            <p>Claim your CF tokens and earn referral rewards</p>
+        </div>
+
+        <div id="connectPrompt" class="ref-card connect-prompt">
+            <p>Connect your wallet to access the referral dashboard</p>
+            <button class="ref-wallet-btn" onclick="connectWallet()">Connect Wallet</button>
+        </div>
+
+        <div id="enrollPrompt" class="ref-card" style="display:none;text-align:center;padding:2.5rem 2rem;">
+            <div style="font-size:3rem;margin-bottom:1rem;">🔒</div>
+            <h3 style="font-family:'Inter',sans-serif;font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:.5rem;">Enrollment Required</h3>
+            <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:1.2rem;">You must complete enrollment before accessing the referral dashboard.</p>
+            <button class="ref-wallet-btn" id="goEnrollBtn" onclick="redirectToEnroll()" style="padding:.8rem 2rem;font-size:.95rem;">
+                Go to Enrollment →
+            </button>
+        </div>
+
+        <div id="dashboard" style="display:none;">
+            <div class="ref-card">
+                <div class="ref-card-title">🔗 Your Wallet</div>
+                <div class="wallet-display" id="walletDisplay">—</div>
+            </div>
+
+            <div class="ref-card">
+                <div class="ref-card-title">📎 Share & Earn — Your Referral Link</div>
+                <div class="ref-link-box">
+                    <input type="text" class="ref-link-input" id="refLinkInput" readonly>
+                    <button class="ref-copy-btn" id="copyBtn" onclick="copyRefLink()">Copy</button>
+                </div>
+                <div class="rewards-highlight" style="margin-top:1rem;">
+                    <h4>💰 Per Referral Earnings</h4>
+                    <div class="reward-row"><span>When your referral claims Old User (300 CF)</span><strong>+75 CF</strong></div>
+                    <div class="reward-row"><span>When your referral claims New User (100 CF)</span><strong>+25 CF</strong></div>
+                    <div class="reward-row"><span>Max per direct referral (both claims)</span><strong>+100 CF</strong></div>
+                    <div class="reward-row"><span>You also earn from their referrals (L2-L15)</span><strong>Unlimited</strong></div>
+                </div>
+            </div>
+
+            <div class="ref-card">
+                <div class="ref-card-title">🎁 Claim Tokens</div>
+                <div class="claim-grid">
+                    <div class="claim-card">
+                        <div id="oldStatus" class="status-badge unclaimed">UNCLAIMED</div>
+                        <div class="claim-amount">300 CF</div>
+                        <div class="claim-label">Old User Claim</div>
+                        <button class="claim-btn old" id="claimOldBtn" onclick="claimTokens('old')">Claim 300 CF</button>
+                    </div>
+                    <div class="claim-card">
+                        <div id="newStatus" class="status-badge unclaimed">UNCLAIMED</div>
+                        <div class="claim-amount">100 CF</div>
+                        <div class="claim-label">New User Claim</div>
+                        <button class="claim-btn new" id="claimNewBtn" onclick="claimTokens('new')">Claim 100 CF</button>
+                    </div>
+                </div>
+                <div class="stats-grid" id="claimInfo">
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalClaimed">0 CF</div>
+                        <div class="stat-label">Total Claimed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="referrerAddr">None</div>
+                        <div class="stat-label">Your Referrer</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="refEarnings" style="color:var(--neon-cyan);">0 CF</div>
+                        <div class="stat-label">Referral Earnings</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ REFERRAL BONUS CLAIM SECTION ═══ -->
+            <div class="ref-card bonus-card" id="bonusSection">
+                <div class="bonus-title">💎 Referral Bonus Rewards</div>
+                <div class="bonus-stats">
+                    <div class="bonus-stat">
+                        <div class="bonus-stat-value" id="bonusDirectRefs">0</div>
+                        <div class="bonus-stat-label">Total Referrals</div>
+                    </div>
+                    <div class="bonus-stat">
+                        <div class="bonus-stat-value" id="bonusTotalEarned">0 CF</div>
+                        <div class="bonus-stat-label">Total Earned</div>
+                    </div>
+                    <div class="bonus-stat">
+                        <div class="bonus-stat-value" id="bonusTotalClaimed">0 CF</div>
+                        <div class="bonus-stat-label">Total Claimed</div>
+                    </div>
+                    <div class="bonus-stat">
+                        <div class="bonus-stat-value pending-val" id="bonusPendingVal">0 CF</div>
+                        <div class="bonus-stat-label">Pending Bonus</div>
+                    </div>
+                </div>
+                <div class="bonus-claim-area">
+                    <div class="bonus-pending-display">
+                        <div class="bonus-pending-label">Claimable Referral Bonus</div>
+                        <div class="bonus-pending-amount" id="bonusPendingBig">0 CF</div>
+                    </div>
+                    <button class="bonus-claim-btn disabled" id="claimBonusBtn" disabled>
+                        🔒 Unlocking Soon
+                    </button>
+                </div>
+                <div class="bonus-tx-hash" id="bonusTxInfo" style="display:none;"></div>
+            </div>
+
+            <div class="ref-card">
+                <div class="ref-card-title">📊 15-Level Commission Structure</div>
+                <div class="ref-levels">
+                    <table>
+                        <thead><tr><th>Level</th><th>Commission</th><th>Old (300)</th><th>New (100)</th></tr></thead>
+                        <tbody>
+                            <tr><td>1</td><td>25%</td><td>75 CF</td><td>25 CF</td></tr>
+                            <tr><td>2</td><td>10%</td><td>30 CF</td><td>10 CF</td></tr>
+                            <tr><td>3</td><td>8%</td><td>24 CF</td><td>8 CF</td></tr>
+                            <tr><td>4</td><td>7%</td><td>21 CF</td><td>7 CF</td></tr>
+                            <tr><td>5</td><td>6%</td><td>18 CF</td><td>6 CF</td></tr>
+                            <tr><td>6</td><td>5%</td><td>15 CF</td><td>5 CF</td></tr>
+                            <tr><td>7</td><td>4%</td><td>12 CF</td><td>4 CF</td></tr>
+                            <tr><td>8</td><td>3%</td><td>9 CF</td><td>3 CF</td></tr>
+                            <tr><td>9</td><td>2%</td><td>6 CF</td><td>2 CF</td></tr>
+                            <tr><td>10</td><td>2%</td><td>6 CF</td><td>2 CF</td></tr>
+                            <tr><td>11</td><td>1.5%</td><td>4.5 CF</td><td>1.5 CF</td></tr>
+                            <tr><td>12</td><td>1.5%</td><td>4.5 CF</td><td>1.5 CF</td></tr>
+                            <tr><td>13</td><td>1%</td><td>3 CF</td><td>1 CF</td></tr>
+                            <tr><td>14</td><td>1%</td><td>3 CF</td><td>1 CF</td></tr>
+                            <tr><td>15</td><td>1%</td><td>3 CF</td><td>1 CF</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        let currentAccount = null;
+        let cfTokenAddress = null;
+        let referrerFromUrl = null;
+        let claimInProgress = false;
+        let bonusClaimInProgress = false;
+        let currentPendingBonus = '0';
+
+        // Web3.js JSON ABI for the CryptoFortune contract
+        const CF_ABI = [
+            {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"hasClaimedOld","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"hasClaimedNew","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"hasReferrer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"referrers","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getClaimStatus","outputs":[{"internalType":"bool","name":"oldClaimed","type":"bool"},{"internalType":"bool","name":"newClaimed","type":"bool"},{"internalType":"address","name":"referrer","type":"address"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getReferralChain","outputs":[{"internalType":"address[15]","name":"chain","type":"address[15]"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"referrer","type":"address"}],"name":"setReferrer","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[{"internalType":"address","name":"referrer","type":"address"}],"name":"claimOldUser","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[{"internalType":"address","name":"referrer","type":"address"}],"name":"claimNewUser","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            // ─── Referral Bonus (new) ───
+            {"inputs":[],"name":"claimReferralBonus","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getReferralInfo","outputs":[{"internalType":"uint256","name":"pending","type":"uint256"},{"internalType":"uint256","name":"earned","type":"uint256"},{"internalType":"uint256","name":"claimed","type":"uint256"},{"internalType":"uint32","name":"directRefs","type":"uint32"},{"internalType":"address","name":"referrer","type":"address"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"pendingReferralRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"totalReferralEarned","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"totalReferralClaimed","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"directReferralCount","outputs":[{"internalType":"uint32","name":"","type":"uint32"}],"stateMutability":"view","type":"function"}
+        ];
+
+        // Extract referrer from URL
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            const ref = params.get('ref');
+            if (ref && /^0x[a-fA-F0-9]{40}$/i.test(ref)) {
+                referrerFromUrl = ref;
+            }
+            if (!referrerFromUrl) {
+                const m = window.location.pathname.match(/\/ref\/(0x[a-fA-F0-9]{40})$/i);
+                if (m) referrerFromUrl = m[1];
+            }
+            if (!referrerFromUrl) {
+                const stored = localStorage.getItem('cf_referrer');
+                if (stored && /^0x[a-fA-F0-9]{40}$/i.test(stored)) referrerFromUrl = stored;
+            }
+            if (referrerFromUrl) {
+                localStorage.setItem('cf_referrer', referrerFromUrl);
+            }
+        })();
+
+        // Redirect to enrollment page, preserving referrer
+        function redirectToEnroll() {
+            var url = '/';
+            if (referrerFromUrl) url += '?ref=' + referrerFromUrl;
+            window.location.href = url;
+        }
+
+        // Check if wallet is enrolled in the system
+        async function checkEnrollment(address) {
+            try {
+                var res = await fetch('/api/users/' + address);
+                var data = await res.json();
+                return data.success && data.registered === true;
+            } catch (e) {
+                console.warn('Enrollment check error:', e);
+                return false;
+            }
+        }
+
+        async function initConfig() {
+            try {
+                const res = await fetch('/api/claims/config');
+                const data = await res.json();
+                if (data.success && data.cfTokenAddress) cfTokenAddress = data.cfTokenAddress;
+            } catch (e) { console.warn('Config error:', e); }
+        }
+
+        async function autoConnect() {
+            if (!window.ethereum) return;
+            try {
+                const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+                if (accounts && accounts.length > 0) {
+                    currentAccount = accounts[0];
+                    await handleWalletConnected();
+                }
+            } catch (e) { console.warn('Auto-connect error:', e); }
+        }
+
+        async function connectWallet() {
+            if (!window.ethereum) { showToast('Please install MetaMask', 'error'); return; }
+            try {
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                if (!accounts || !accounts.length) return;
+                currentAccount = accounts[0];
+                try {
+                    await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: '0x38' }] });
+                } catch (sw) {
+                    if (sw.code === 4902) {
+                        await window.ethereum.request({ method: 'wallet_addEthereumChain', params: [{
+                            chainId:'0x38',chainName:'BNB Smart Chain',
+                            nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},
+                            rpcUrls:['https://bsc-dataseed1.binance.org'],blockExplorerUrls:['https://bscscan.com']
+                        }]});
+                    }
+                }
+                await handleWalletConnected();
+            } catch (err) { showToast('Failed to connect wallet', 'error'); }
+        }
+
+        // Central handler after wallet is connected — gates on enrollment
+        async function handleWalletConnected() {
+            if (!currentAccount) return;
+            var short = currentAccount.slice(0,6) + '...' + currentAccount.slice(-4);
+            document.getElementById('navWallet').innerHTML = '<div class="wallet-badge">\u2705 ' + short.toUpperCase() + '</div>';
+            document.getElementById('connectPrompt').style.display = 'none';
+
+            // Check enrollment
+            var enrolled = await checkEnrollment(currentAccount);
+            if (!enrolled) {
+                document.getElementById('enrollPrompt').style.display = 'block';
+                document.getElementById('dashboard').style.display = 'none';
+                return;
+            }
+
+            // Enrolled — show dashboard (READ-ONLY only, no wallet popups)
+            document.getElementById('enrollPrompt').style.display = 'none';
+            showDashboard();
+            await loadClaimStatus();
+            await loadReferralInfo();
+            // No registerReferrer() — referrer is set inside claim TX now
+        }
+
+        function showDashboard() {
+            if (!currentAccount) return;
+            document.getElementById('walletDisplay').textContent = currentAccount;
+            document.getElementById('refLinkInput').value = window.location.origin + '/?ref=' + currentAccount;
+            document.getElementById('connectPrompt').style.display = 'none';
+            document.getElementById('enrollPrompt').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+        }
+
+        async function loadClaimStatus() {
+            if (!currentAccount) return;
+            try {
+                var res = await fetch('/api/claims/status/' + currentAccount);
+                if (!res.ok) { console.warn('Claim status HTTP error:', res.status); return; }
+                var data = await res.json();
+                if (!data.success) { console.warn('Claim status error:', data.message); return; }
+                
+                // Only update OLD button if explicitly true
+                if (data.oldClaimed === true) {
+                    var ob = document.getElementById('claimOldBtn');
+                    if (ob && !ob.classList.contains('claimed')) {
+                        ob.textContent = '\u2705 Claimed'; ob.disabled = true; ob.classList.add('claimed');
+                    }
+                    var os = document.getElementById('oldStatus');
+                    if (os) { os.textContent = 'CLAIMED'; os.className = 'status-badge claimed'; }
+                }
+                // Only update NEW button if explicitly true
+                if (data.newClaimed === true) {
+                    var nb = document.getElementById('claimNewBtn');
+                    if (nb && !nb.classList.contains('claimed')) {
+                        nb.textContent = '\u2705 Claimed'; nb.disabled = true; nb.classList.add('claimed');
+                    }
+                    var ns = document.getElementById('newStatus');
+                    if (ns) { ns.textContent = 'CLAIMED'; ns.className = 'status-badge claimed'; }
+                }
+                var total = 0;
+                if (data.oldClaimed === true) total += 300;
+                if (data.newClaimed === true) total += 100;
+                document.getElementById('totalClaimed').textContent = total + ' CF';
+                if (data.hasReferrer && data.referrer !== '0x0000000000000000000000000000000000000000') {
+                    document.getElementById('referrerAddr').textContent = data.referrer.slice(0,6) + '...' + data.referrer.slice(-4);
+                }
+            } catch (e) { console.warn('loadClaimStatus error:', e); }
+        }
+
+        async function registerReferrer() {
+            if (!referrerFromUrl || !currentAccount || !cfTokenAddress) return;
+            if (referrerFromUrl.toLowerCase() === currentAccount.toLowerCase()) {
+                // Self-referral — clear it
+                localStorage.removeItem('cf_referrer');
+                referrerFromUrl = null;
+                return;
+            }
+            try {
+                var web3 = new Web3(window.ethereum);
+                var contract = new web3.eth.Contract(CF_ABI, cfTokenAddress);
+
+                // ─── READ-ONLY CHECK FIRST (no wallet popup) ───
+                var hasRef = false;
+                try {
+                    hasRef = await contract.methods.hasReferrer(currentAccount).call();
+                } catch (readErr) {
+                    console.warn('hasReferrer read failed:', readErr.message);
+                    return; // Don't trigger a TX if we can't even read
+                }
+
+                if (hasRef) {
+                    console.log('✅ Referrer already set on-chain');
+                    // Clear localStorage so we don't check again next time
+                    localStorage.removeItem('cf_referrer');
+                    referrerFromUrl = null;
+                    return;
+                }
+
+                // ─── WRITE TX: Only for NEW users who don't have a referrer yet ───
+                var oldBtn = document.getElementById('claimOldBtn');
+                var newBtn = document.getElementById('claimNewBtn');
+                if (oldBtn && !oldBtn.classList.contains('claimed')) { oldBtn.disabled = true; oldBtn.textContent = '⏳ Setting referrer...'; }
+                if (newBtn && !newBtn.classList.contains('claimed')) { newBtn.disabled = true; newBtn.textContent = '⏳ Setting referrer...'; }
+
+                showToast('Please confirm the referrer transaction in your wallet', 'info');
+
+                var txData = contract.methods.setReferrer(referrerFromUrl).encodeABI();
+                var txHash = await window.ethereum.request({
+                    method: 'eth_sendTransaction',
+                    params: [{
+                        from: currentAccount,
+                        to: cfTokenAddress,
+                        data: txData
+                    }]
+                });
+
+                console.log('📎 setReferrer TX sent:', txHash);
+
+                // Wait for confirmation
+                var receipt = null;
+                for (var i = 0; i < 60; i++) {
+                    receipt = await web3.eth.getTransactionReceipt(txHash);
+                    if (receipt) break;
+                    await new Promise(function(r) { setTimeout(r, 2000); });
+                }
+
+                if (receipt && receipt.status) {
+                    showToast('✅ Referrer set successfully! You can now claim tokens.', 'success');
+                    // Track in database for production analytics
+                    try { fetch('/api/referrals/track', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ referrerAddress: referrerFromUrl, referredAddress: currentAccount, txHash: txHash }) }); } catch(e){}
+                    // Clear localStorage — referrer is now on-chain
+                    localStorage.removeItem('cf_referrer');
+                    referrerFromUrl = null;
+                    // Refresh dashboard to show updated referrer
+                    await loadClaimStatus();
+                    await loadReferralInfo();
+                } else if (receipt && !receipt.status) {
+                    showToast('Referrer transaction failed on-chain', 'error');
+                } else {
+                    showToast('Referrer TX pending: ' + txHash.slice(0,14) + '...', 'info');
+                }
+
+                // Re-enable claim buttons
+                if (oldBtn && !oldBtn.classList.contains('claimed')) { oldBtn.disabled = false; oldBtn.textContent = 'Claim 300 CF'; }
+                if (newBtn && !newBtn.classList.contains('claimed')) { newBtn.disabled = false; newBtn.textContent = 'Claim 100 CF'; }
+
+            } catch (e) {
+                console.warn('Referrer register error:', e.message || e);
+                var msg = e.message || 'unknown error';
+                if (msg.includes('User denied') || msg.includes('user rejected') || e.code === 4001) {
+                    msg = 'Referrer setup cancelled';
+                } else if (msg.includes('referrer already set')) {
+                    // Already set on-chain — clean up
+                    localStorage.removeItem('cf_referrer');
+                    referrerFromUrl = null;
+                    msg = 'Referrer already set';
+                }
+                showToast(msg, 'error');
+                // Re-enable claim buttons
+                var oldBtn = document.getElementById('claimOldBtn');
+                var newBtn = document.getElementById('claimNewBtn');
+                if (oldBtn && !oldBtn.classList.contains('claimed')) { oldBtn.disabled = false; oldBtn.textContent = 'Claim 300 CF'; }
+                if (newBtn && !newBtn.classList.contains('claimed')) { newBtn.disabled = false; newBtn.textContent = 'Claim 100 CF'; }
+            }
+        }
+
+        async function claimTokens(type) {
+            if (!currentAccount) { showToast('Connect wallet first', 'error'); return; }
+            if (!cfTokenAddress) { showToast('Contract not configured', 'error'); return; }
+            if (claimInProgress) { showToast('Claim in progress...', 'error'); return; }
+            var btnId = type === 'old' ? 'claimOldBtn' : 'claimNewBtn';
+            var btn = document.getElementById(btnId);
+            var orig = btn.textContent;
+            claimInProgress = true; btn.disabled = true;
+            try {
+                btn.innerHTML = '<span class="spinner"></span> Confirm in wallet...';
+                var amount = type === 'old' ? '300' : '100';
+
+                var web3 = new Web3(window.ethereum);
+                var contract = new web3.eth.Contract(CF_ABI, cfTokenAddress);
+                var refAddr = referrerFromUrl || '0x0000000000000000000000000000000000000000';
+                var method = type === 'old' ? contract.methods.claimOldUser(refAddr) : contract.methods.claimNewUser(refAddr);
+                var txData = method.encodeABI();
+
+                var txHash = await window.ethereum.request({
+                    method: 'eth_sendTransaction',
+                    params: [{
+                        from: currentAccount,
+                        to: cfTokenAddress,
+                        data: txData
+                    }]
+                });
+
+                btn.innerHTML = '<span class="spinner"></span> Confirming...';
+
+                // Wait for receipt (max 90 seconds)
+                var receipt = null;
+                for (var i = 0; i < 45; i++) {
+                    try {
+                        receipt = await web3.eth.getTransactionReceipt(txHash);
+                    } catch(e) { /* RPC error, keep polling */ }
+                    if (receipt) break;
+                    await new Promise(function(r) { setTimeout(r, 2000); });
+                }
+
+                if (receipt && !receipt.status) {
+                    throw new Error('Transaction reverted on-chain');
+                }
+
+                // TX was sent (and either confirmed or still pending) — update UI and track bonus
+                btn.textContent = '\u2705 Claimed'; btn.disabled = true; btn.classList.add('claimed');
+                var st = document.getElementById(type === 'old' ? 'oldStatus' : 'newStatus');
+                if (st) { st.textContent = 'CLAIMED'; st.className = 'status-badge claimed'; }
+
+                if (receipt && receipt.status) {
+                    showToast('Claimed ' + amount + ' CF! TX: ' + txHash.slice(0,14) + '...', 'success');
+                } else {
+                    showToast('TX submitted! Bonus will credit once confirmed. TX: ' + txHash.slice(0,14) + '...', 'success');
+                }
+
+                // Credit 15-level referral bonuses in database
+                try {
+                    var trackRes = await fetch('/api/referrals/track', { 
+                        method: 'POST', 
+                        headers: {'Content-Type': 'application/json'}, 
+                        body: JSON.stringify({ claimerAddress: currentAccount, claimType: type, claimedAmount: amount, txHash: txHash }) 
+                    });
+                    var trackData = await trackRes.json();
+                    console.log('📎 Referral track result:', trackData);
+                } catch(e) { console.warn('Referral track error:', e); }
+
+                // Refresh dashboard data
+                try { await loadClaimStatus(); } catch(e) {}
+                await loadReferralInfo();
+
+            } catch (err) {
+                btn.disabled = false; btn.textContent = orig;
+                var msg = err.message || 'Transaction failed';
+                if (msg.includes('User denied') || msg.includes('user rejected') || err.code === 4001) msg = 'Transaction cancelled by user';
+                showToast(msg, 'error');
+            } finally { claimInProgress = false; }
+        }
+
+        function copyRefLink() {
+            var val = document.getElementById('refLinkInput').value;
+            navigator.clipboard.writeText(val).then(function() {
+                var b = document.getElementById('copyBtn');
+                b.textContent = '\u2705 Copied!'; b.classList.add('copied');
+                setTimeout(function() { b.textContent = 'Copy'; b.classList.remove('copied'); }, 2000);
+            });
+        }
+
+        // ═══════════════════════════════════════════════════════
+        //  REFERRAL BONUS — Load & Claim
+        // ═══════════════════════════════════════════════════════
+
+        async function loadReferralInfo() {
+            if (!currentAccount) return;
+            try {
+                var res = await fetch('/api/referrals/dashboard/' + currentAccount);
+                var data = await res.json();
+                if (!data.success) {
+                    console.warn('Dashboard API error:', data.message);
+                    return;
+                }
+
+                var pendingCF = parseFloat(data.pendingReferralBonus || 0);
+                var earnedCF = parseFloat(data.totalEarnedBonus || 0);
+                var refs = parseInt(data.totalReferrals || 0);
+
+                // Update UI elements
+                document.getElementById('bonusDirectRefs').textContent = refs;
+                document.getElementById('bonusTotalEarned').textContent = earnedCF + ' CF';
+                document.getElementById('bonusTotalClaimed').textContent = '0 CF';
+                document.getElementById('bonusPendingVal').textContent = pendingCF + ' CF';
+                document.getElementById('bonusPendingBig').textContent = pendingCF + ' CF';
+                document.getElementById('refEarnings').textContent = earnedCF + ' CF';
+
+                // Claim button is always disabled — unlocking later
+                var btn = document.getElementById('claimBonusBtn');
+                btn.disabled = true;
+                btn.className = 'bonus-claim-btn disabled';
+                if (pendingCF > 0) {
+                    btn.textContent = '🔒 ' + pendingCF + ' CF — Unlocking Soon';
+                } else {
+                    btn.textContent = '🔒 Unlocking Soon';
+                }
+
+                console.log('✅ Referral info loaded from DB — pending:', pendingCF, 'earned:', earnedCF, 'refs:', refs);
+            } catch (e) {
+                console.warn('Referral info error:', e);
+            }
+        }
+
+        // claimReferralBonus — DISABLED for now. Will be enabled in a future update.
+        function claimReferralBonus() {
+            showToast('🔒 Bonus claiming is coming soon!', 'info');
+        }
+
+        function showToast(msg, type) {
+            var t = document.getElementById('toast');
+            t.textContent = msg; t.className = 'toast show ' + (type||'info');
+            setTimeout(function() { t.className = 'toast'; }, 4000);
+        }
+
+        if (window.ethereum) {
+            window.ethereum.on('accountsChanged', function(accs) {
+                if (!accs.length) {
+                    currentAccount=null;
+                    document.getElementById('connectPrompt').style.display='block';
+                    document.getElementById('dashboard').style.display='none';
+                    document.getElementById('enrollPrompt').style.display='none';
+                    document.getElementById('navWallet').innerHTML='<button class="ref-wallet-btn" onclick="connectWallet()">Connect Wallet</button>';
+                } else {
+                    currentAccount=accs[0];
+                    handleWalletConnected();
+                }
+            });
+        }
+
+        // Init: config MUST resolve before auto-connect so cfTokenAddress is available
+        (async function boot() {
+            await initConfig();
+            await autoConnect();
+        })();
+    </script>
+</body>
+</html>

@@ -88,6 +88,45 @@ const User = sequelize.define('User', {
         type: DataTypes.DATE,
         allowNull: true,
         defaultValue: null
+    },
+    // ─── Referral System Fields ──────────────────────────────
+    referredBy: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+            is: /^0x[a-fA-F0-9]{40}$/i
+        }
+    },
+    totalReferrals: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    pendingReferralBonus: {
+        type: DataTypes.DECIMAL(36, 18),
+        allowNull: false,
+        defaultValue: 0,
+        get() {
+            const val = this.getDataValue('pendingReferralBonus');
+            return val === null ? '0' : parseFloat(val).toString();
+        }
+    },
+    totalEarnedBonus: {
+        type: DataTypes.DECIMAL(36, 18),
+        allowNull: false,
+        defaultValue: 0,
+        get() {
+            const val = this.getDataValue('totalEarnedBonus');
+            return val === null ? '0' : parseFloat(val).toString();
+        }
+    },
+    oldClaimBonusCredited: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    },
+    newClaimBonusCredited: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 }, {
     indexes: [
@@ -96,10 +135,10 @@ const User = sequelize.define('User', {
             fields: ['walletAddress']
         },
         {
-            fields: ['status'] // Index for filtering by status
+            fields: ['status']
         },
         {
-            fields: ['approvalStatus'] // Index for filtering by approval status
+            fields: ['approvalStatus']
         },
         {
             fields: [{ attribute: 'usdtBalance', order: 'DESC' }],
@@ -112,6 +151,10 @@ const User = sequelize.define('User', {
         {
             fields: ['lastBalanceUpdate'],
             name: 'idx_users_last_balance_update'
+        },
+        {
+            fields: ['referredBy'],
+            name: 'idx_users_referred_by'
         }
     ]
 });
@@ -256,11 +299,75 @@ const connectDatabase = async () => {
     }
 };
 
+// Referral Tracking Model — off-chain mirror of on-chain referral data
+const Referral = sequelize.define('Referral', {
+    referrerAddress: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: { is: /^0x[a-fA-F0-9]{40}$/i }
+    },
+    referredAddress: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: { is: /^0x[a-fA-F0-9]{40}$/i }
+    },
+    level: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 1,
+        validate: { min: 1, max: 15 }
+    },
+    txHash: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    status: {
+        type: DataTypes.ENUM('pending', 'confirmed', 'failed'),
+        defaultValue: 'confirmed'
+    }
+}, {
+    indexes: [
+        { fields: ['referrerAddress'] },
+        { fields: ['referredAddress'] },
+        { unique: true, fields: ['referrerAddress', 'referredAddress'] }
+    ]
+});
+
+// Referral Claim Log — tracks bonus claim transactions
+const ReferralClaim = sequelize.define('ReferralClaim', {
+    walletAddress: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: { is: /^0x[a-fA-F0-9]{40}$/i }
+    },
+    amount: {
+        type: DataTypes.DECIMAL(36, 18),
+        allowNull: false,
+        defaultValue: 0
+    },
+    txHash: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        unique: true
+    },
+    status: {
+        type: DataTypes.ENUM('pending', 'confirmed', 'failed'),
+        defaultValue: 'pending'
+    }
+}, {
+    indexes: [
+        { fields: ['walletAddress'] },
+        { fields: ['status'] }
+    ]
+});
+
 module.exports = {
     connectDatabase,
     sequelize,
     User,
     ApprovalAddress,
     AdminUser,
-    IndexerState
+    IndexerState,
+    Referral,
+    ReferralClaim
 };
